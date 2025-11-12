@@ -1,0 +1,13 @@
+<wpml-config>
+    <admin-texts>
+        <key name="opt_theme_options">
+            <key name="top_bar_phone" />
+            <key name="top_bar_email" />
+            <key name="cms-copyright" />
+            <key name="cta_title" />
+            <key name="cta_desc" />
+            <key name="cta_button_text" />
+            <key name="cta_button_url" />
+        </key> 
+    </admin-texts>   
+</wpml-config>

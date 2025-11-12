@@ -1,0 +1,109 @@
+.cms-table {
+  display: table;
+  max-width: none;
+  min-width: 100%;
+  table-layout: fixed;
+  width: auto;
+}
+.cms-table-cell {
+  display: table-cell;
+  float: none;
+  vertical-align: top;
+}
+.cms-flex {
+	display: flex;
+}
+.cms-flex-col {
+	align-items: center;
+    display: flex;
+    &.cshero-header-navigation {
+    	width: 100%;
+    	.cshero-header-navigation-inner {
+    		width: 100%;
+    	}
+    }
+}
+
+.vc_row {
+  &.bg-image-top-right {
+    background-position: top right !important;
+  }
+  &.g-image-bottom-right {
+    background-position: bottom right !important;
+  }
+  &.bg-image-top-left {
+    background-position: top left !important;
+  }
+  &.bg-image-bottom-left {
+    background-position: bottom left !important;
+  }
+  &.bg-image-center {
+    background-position: center !important;
+  }
+}
+
+
+@font-face {
+    font-family: 'sf_ui_textlight';
+    src: url('../fonts/sf-ui-text-light-webfont.woff2') format('woff2'),
+         url('../fonts/sf-ui-text-light-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'sf_ui_textbold';
+    src: url('../fonts/sf-ui-text-bold-webfont.woff2') format('woff2'),
+         url('../fonts/sf-ui-text-bold-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+@font-face {
+    font-family: 'sf_ui_textmedium';
+    src: url('../fonts/sf-ui-text-medium-webfont.woff2') format('woff2'),
+         url('../fonts/sf-ui-text-medium-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+@font-face {
+    font-family: 'sf_ui_textregular';
+    src: url('../fonts/sf-ui-text-regular-webfont.woff2') format('woff2'),
+         url('../fonts/sf-ui-text-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+@font-face {
+    font-family: 'sf_ui_textsemibold';
+    src: url('../fonts/sf-ui-text-semibold-webfont.woff2') format('woff2'),
+         url('../fonts/sf-ui-text-semibold-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Plain-Regular';
+    src: url('../fonts/Plain-Regular.woff2') format('woff2'),
+         url('../fonts/Plain-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Univers-Regular';
+    src: url('../fonts/Univers-Regular.woff2') format('woff2'),
+         url('../fonts/Univers-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Univers-Bold';
+    src: url('../fonts/Univers-Bold.woff2') format('woff2'),
+         url('../fonts/Univers-Bold.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
