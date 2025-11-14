@@ -14,7 +14,7 @@ $jr_url_jobs = get_permalink($jr_jobs);
 <div class="jobboard-resources-wrap jobboard-resources-shortcode">
     <?php if(!empty($atts['title'])) : ?>
         <div class="jr-heading">
-            <h3><?php echo esc_attr( $atts['title'] ); ?></h3>
+            <h3><?php echo esc_html( $atts['title'] ); ?></h3>
         </div>
     <?php endif; ?>
     <div class="jr-items">
@@ -40,12 +40,12 @@ $jr_url_jobs = get_permalink($jr_jobs);
             <div class="jr-item">
                 <div class="jr-item-inner">
                     <div class="jr-holder">
-                        <h3 class="jr-title"><i class="zmdi zmdi-file-text"></i><?php echo esc_attr($jr->post_title) ?></h3>
+                        <h3 class="jr-title"><i class="zmdi zmdi-file-text"></i><?php echo esc_html($jr->post_title) ?></h3>
                         <span class="jr-file-size">.<?php echo esc_attr($extension)?> (<?php echo esc_attr($file_size_layout) ?>)</span>
-                        <div class="jr-content"><?php echo esc_attr($jr->post_content) ?></div>
+                        <div class="jr-content"><?php echo esc_html($jr->post_content) ?></div>
                     </div>
                     <form class="jr-action">
-                        <input type="text" placeholder="<?php echo esc_html__('Email Address', 'wp-recruitment') ?>">
+                        <input type="text" placeholder="<?php echo esc_attr__('Email Address', 'wp-recruitment') ?>">
                         <button class="jr-button-download" data-id="<?php echo ''.$jr->ID ?>"><?php echo esc_html__('Free Download', 'wp-recruitment')?></button>
                         <?php wp_nonce_field('jr_download', '_wp_nonce_jr_download'); ?>
                     </form>

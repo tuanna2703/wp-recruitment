@@ -190,34 +190,38 @@ class CMSSuperHeroes_StaticCss
      */
     public function css_render()
     {
-        global $opt_theme_options;
+        $primary_color = recruitment_get_opt('primary_color', '#4e007a');
+        $secondary_color = recruitment_get_opt('secondary_color', '#2a65ff');
+        $link_color = recruitment_get_opt('link_color', '#4e007a');
+        $link_color_hover = recruitment_get_opt('link_color_hover', '#000000');
+        $event_banner = recruitment_get_opt('event_banner', []);
 
         ob_start();
 
         /* forward options to scss. */
-        if (!empty($opt_theme_options['primary_color'])) {
-            echo '$primary_color:' . esc_attr($opt_theme_options['primary_color']) . ';';
+        if (!empty($primary_color)) {
+            echo '$primary_color:' . esc_attr($primary_color) . ';';
         }
 
-        if (!empty($opt_theme_options['secondary_color'])) {
-            echo '$secondary_color:' . esc_attr($opt_theme_options['secondary_color']) . ';';
+        if (!empty($secondary_color)) {
+            echo '$secondary_color:' . esc_attr($secondary_color) . ';';
         }
 
-        if (!empty($opt_theme_options['primary_color'])) {
+        if (!empty($primary_color)) {
             echo ".faq-search #searchform, .map-search-form .search-form, .jb-s-wrapper {
-                background-color:" . recruitment_hex_to_rgb($opt_theme_options['primary_color'], 0.5) . ";
+                background-color:" . recruitment_hex_to_rgb($primary_color, 0.5) . ";
             }";
         }
 
-        if (!empty($opt_theme_options['primary_color'])) {
+        if (!empty($primary_color)) {
             echo ".vc_tta-container .vc_tta-accordion.vc_tta-style-modern .vc_tta-panels .vc_tta-panel-body {
-                border-left: 1px solid " . recruitment_hex_to_rgb($opt_theme_options['primary_color'], 0.4) . ";
-                border-right: 1px solid " . recruitment_hex_to_rgb($opt_theme_options['primary_color'], 0.4) . ";
-                border-bottom: 1px solid " . recruitment_hex_to_rgb($opt_theme_options['primary_color'], 0.4) . ";
+                border-left: 1px solid " . recruitment_hex_to_rgb($primary_color, 0.4) . ";
+                border-right: 1px solid " . recruitment_hex_to_rgb($primary_color, 0.4) . ";
+                border-bottom: 1px solid " . recruitment_hex_to_rgb($primary_color, 0.4) . ";
             }";
         }
 
-        if (!empty($opt_theme_options['primary_color'])) {
+        if (!empty($primary_color)) {
             echo ".register-form input[type='text'],
             .register-form input[type='password'],
             .register-form input[type='datetime'],
@@ -233,24 +237,19 @@ class CMSSuperHeroes_StaticCss
             .register-form input[type='tel'],
             .register-form input[type='color'],
             .register-form textarea, .register-form select {
-                background-color: " . recruitment_hex_to_rgb($opt_theme_options['primary_color'], 0.1) . ";
+                background-color: " . recruitment_hex_to_rgb($primary_color, 0.1) . ";
             }";
         }
 
-        if (!empty($opt_theme_options['link_color']))
-            echo '$link_color:' . esc_attr($opt_theme_options['link_color']) . ';';
+        if (!empty($link_color))
+            echo '$link_color:' . esc_attr($link_color) . ';';
 
-        if (!empty($opt_theme_options['link_color_hover']))
-            echo '$link_color_hover:' . esc_attr($opt_theme_options['link_color_hover']) . ';';
+        if (!empty($link_color_hover))
+            echo '$link_color_hover:' . esc_attr($link_color_hover) . ';';
 
-        if (!empty($opt_theme_options['footer_bg'])) {
-            echo "body #colophon.site-footer {
-                background-color:" . esc_attr($opt_theme_options['footer_bg']) . ";
-            }";
-        }
-        if (!empty($opt_theme_options['event_banner']['url'])) {
+        if (!empty($event_banner['url'])) {
             echo ".event-modern .jobboard-event-banner {
-                background-image: url(" . esc_attr($opt_theme_options['event_banner']['url']) . ");
+                background-image: url(" . esc_attr($event_banner['url']) . ");
             }";
         }
 

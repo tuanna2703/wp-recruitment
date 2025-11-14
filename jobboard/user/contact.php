@@ -25,13 +25,13 @@ if ( ! defined( 'ABSPATH' ) ) {
     <div class="contact-form">
         <form class="jobboard-form message-form" method="POST">
             <div class="form-fields">
-                <input type="text" name="contact-name" class="field-text" value="<?php jb_account_the_current_name(); ?>" placeholder="<?php esc_html_e('Name *', 'wp-recruitment'); ?>">
-                <input type="email" name="contact-email" class="field-text" value="<?php jb_account_the_current_email(); ?>" placeholder="<?php esc_html_e('Email *', 'wp-recruitment'); ?>">
-                <textarea name="contact-message" class="field-textarea" placeholder="<?php esc_html_e('Your Message *', 'wp-recruitment'); ?>"></textarea>
+                <input type="text" name="contact-name" class="field-text" value="<?php jb_account_the_current_name(); ?>" placeholder="<?php esc_attr_e('Name *', 'wp-recruitment'); ?>">
+                <input type="email" name="contact-email" class="field-text" value="<?php jb_account_the_current_email(); ?>" placeholder="<?php esc_attr_e('Email *', 'wp-recruitment'); ?>">
+                <textarea name="contact-message" class="field-textarea" placeholder="<?php esc_attr_e('Your Message *', 'wp-recruitment'); ?>"></textarea>
             </div>
             <div class="form-actions message-actions">
                 <?php wp_nonce_field( 'send_message' ); ?>
-                <input type="submit" class="button" value="<?php esc_html_e('Send Message', 'wp-recruitment'); ?>">
+                <input type="submit" class="button" value="<?php esc_attr_e('Send Message', 'wp-recruitment'); ?>">
                 <input type="hidden" name="id" value="<?php jb_account_the_id(); ?>">
                 <input type="hidden" name="action" value="send_message">
                 <input type="hidden" name="form" value="jobboard-form">

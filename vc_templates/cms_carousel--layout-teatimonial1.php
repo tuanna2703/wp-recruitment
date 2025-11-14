@@ -21,7 +21,7 @@
                     ?>
                 </div>
                 <h3 class="cms-testimonial-title"><?php the_title();?></h3>
-                <span class="cms-testimonial-position"><?php echo esc_attr($opt_meta_options['testimonial_position']); ?></span>
+                <span class="cms-testimonial-position"><?php echo esc_html($opt_meta_options['testimonial_position']); ?></span>
             </div>
         </div>
         <?php

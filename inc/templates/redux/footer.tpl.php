@@ -64,7 +64,7 @@
 ?>
         </div>
 
-        <div class="redux-ajax-loading" alt="<?php esc_html_e( 'Working...', 'wp-recruitment' ) ?>">&nbsp;</div>
+        <div class="redux-ajax-loading" alt="<?php esc_attr_e( 'Working...', 'wp-recruitment' ) ?>">&nbsp;</div>
         <div class="clear"></div>
 
     </div>

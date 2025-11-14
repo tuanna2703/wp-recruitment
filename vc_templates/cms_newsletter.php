@@ -14,7 +14,7 @@ if(class_exists('Newsletter')) {
         case 'layout2': ?>
             <div class="job-newsletter box-modern job-newsletter-layout2 <?php echo esc_attr($el_class); ?>">
                 <div class="job-newsletter-heading">
-                    <h3><?php echo esc_attr( $title ); ?></h3>
+                    <h3><?php echo esc_html( $title ); ?></h3>
                     <p><?php echo wp_kses_post($description); ?></p>
                 </div>
                 <div class="job-newsletter-form">
@@ -37,7 +37,7 @@ if(class_exists('Newsletter')) {
             <div class="job-newsletter job-newsletter-layout3 <?php echo esc_attr($el_class); ?>">
                 <?php if(!empty($title) || !empty($description)) : ?>
                     <div class="job-newsletter-heading">
-                        <h3><?php echo esc_attr( $title ); ?></h3>
+                        <h3><?php echo esc_html( $title ); ?></h3>
                         <p><?php echo wp_kses_post($description); ?></p>
                     </div>
                 <?php endif; ?>
@@ -62,7 +62,7 @@ if(class_exists('Newsletter')) {
         default: ?>
             <div class="job-newsletter box-modern row job-newsletter-layout1 <?php echo esc_attr($el_class); ?>">
                 <div class="job-newsletter-heading col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                    <h3><?php echo esc_attr( $title ); ?></h3>
+                    <h3><?php echo esc_html( $title ); ?></h3>
                     <p><?php echo wp_kses_post($description); ?></p>
                 </div>
                 <div class="job-newsletter-form col-lg-6 col-md-6 col-sm-12 col-xs-12">

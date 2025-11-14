@@ -4,21 +4,24 @@
  * @package : CMSSuperHeroes
  * @author : Fox
  */
-global $opt_theme_options;
 
+$top_bar_phone = recruitment_get_opt('top_bar_phone', '');
+$top_bar_email = recruitment_get_opt('top_bar_email', '');
 ?>
 <div id="cshero-header-inner" class="header-1 header-top">
-    <?php if ( class_exists( 'RC_Framework' ) ) { ?>
+    <?php if (class_exists('RC_Framework')) { ?>
         <div id="cshero-header-top" class="hidden-xs header-top-dark">
             <div class="no-container">
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 text-center-sm text-center-xs">
                         <ul class="contact-top">
-                            <?php if(!empty($opt_theme_options['top_bar_phone'])) { ?>
-                                <li><a href="tel:<?php echo esc_attr($opt_theme_options['top_bar_phone']); ?>"><i class="fa fa-phone-square"></i><?php echo esc_attr($opt_theme_options['top_bar_phone']); ?></a></li>
+                            <?php if (!empty($top_bar_phone)) { ?>
+                                <li><a href="tel:<?php echo esc_attr($top_bar_phone); ?>"><i
+                                            class="fa fa-phone-square"></i><?php echo esc_html($top_bar_phone); ?></a></li>
                             <?php } ?>
-                            <?php if(!empty($opt_theme_options['top_bar_email'])) { ?>
-                                <li><a href="mailto:<?php echo esc_attr($opt_theme_options['top_bar_email']); ?>"><i class="fa fa-envelope"></i><?php echo esc_attr($opt_theme_options['top_bar_email']); ?></a></li>
+                            <?php if (!empty($top_bar_email)) { ?>
+                                <li><a href="mailto:<?php echo esc_attr($top_bar_email); ?>"><i
+                                            class="fa fa-envelope"></i><?php echo esc_html($top_bar_email); ?></a></li>
                             <?php } ?>
                         </ul>
                     </div>
@@ -41,7 +44,7 @@ global $opt_theme_options;
                             <div id="cshero-header-navigation-primary" class="cshero-header-navigation">
 
                                 <div class="cshero-navigation-right">
-                                    <?php if(is_active_sidebar('nav')): ?>
+                                    <?php if (is_active_sidebar('nav')): ?>
                                         <?php dynamic_sidebar('nav'); ?>
                                     <?php endif; ?>
                                 </div>

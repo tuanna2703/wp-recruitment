@@ -23,4 +23,4 @@ global $jobboard_options;
 $class = $count == 4 ? ' search-type-active' : '';
 ?>
 
-<div class="search-content clearfix input-<?php echo esc_attr($count); ?><?php echo esc_attr($class); ?>">
+<div class="search-content clearfix input-<?php echo esc_attr($count); ?><?php echo esc_html($class); ?>">

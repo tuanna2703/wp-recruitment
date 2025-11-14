@@ -42,7 +42,7 @@ if ( strlen( $tp_link['url'] ) > 0 ) {
             <div class="cms-textbox-image" style="background-image: url(<?php echo esc_url($image_url); ?>);"></div>
     	<?php endif; ?>
     	<div class="cms-textbox-content col-same">
-    		<h3><?php echo esc_attr( $title ); ?></h3>
+    		<h3><?php echo esc_html( $title ); ?></h3>
     		<p><?php echo wp_kses_post( $tb_content ); ?></p>
     	</div>
     </div>
@@ -55,9 +55,9 @@ if ( strlen( $tp_link['url'] ) > 0 ) {
             </div>
         <?php endif; ?>
         <div class="cms-job-cv-holder">
-            <h3><?php echo esc_attr( $title ); ?></h3>
+            <h3><?php echo esc_html( $title ); ?></h3>
             <div class="cms-job-cv-content" style="margin:<?php echo esc_attr( $content_padding ); ?>"><?php echo wp_kses_post( $tb_content ); ?></div>
-            <a style="color:<?php echo esc_attr($box_bg_color); ?>" class="btn" href="<?php echo esc_url($a_href);?>" target="<?php  echo esc_attr($a_target); ?>" ><?php echo esc_attr( $button_text ); ?></a>
+            <a style="color:<?php echo esc_attr($box_bg_color); ?>" class="btn" href="<?php echo esc_url($a_href);?>" target="<?php  echo esc_attr($a_target); ?>" ><?php echo esc_html( $button_text ); ?></a>
         </div>
     </div>
 <?php } ?>

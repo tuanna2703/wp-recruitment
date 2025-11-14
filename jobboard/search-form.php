@@ -22,7 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 ?>
 
-<form role="search" method="get" class="jb-job-search">
+<form method="get" class="jb-job-search">
 	<div>
         <label class="screen-reader-text" for="jb-job-search-field"><?php echo esc_html($search['placeholder']); ?></label>
         <input type="search" id="jb-job-search-field" class="search-field" placeholder="<?php echo esc_attr($search['placeholder']); ?>" value="<?php echo esc_attr($search['value']); ?>" name="<?php echo esc_attr($search['name']); ?>" title="<?php echo esc_attr($search['placeholder']); ?>" />

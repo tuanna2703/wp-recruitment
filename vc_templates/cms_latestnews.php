@@ -76,7 +76,7 @@ if($layout == 'layout1') { ?>
                 <?php } ?>
             <?php if(!empty($view_all_text)) : ?>
                 <div class="cms-latestnews-viewall text-center">
-                    <a class="btn btn-modern" href="<?php echo esc_url($a_href);?>"><?php echo esc_attr($view_all_text); ?></a>
+                    <a class="btn btn-modern" href="<?php echo esc_url($a_href);?>"><?php echo esc_html($view_all_text); ?></a>
                 </div>
             <?php endif; ?>
         </div>

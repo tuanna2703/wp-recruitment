@@ -25,62 +25,68 @@ if (function_exists('jb_get_locations')) {
     if ($layout_type == 'carousel') { ?>
         <div class="cms-locations-wrap">
             <div class="cms-locations-listing jobs-carousel" data-nav="<?php echo esc_attr($nav); ?>"
-                 data-autoplay="<?php echo esc_attr($autoplay); ?>" data-loop="<?php echo esc_attr($loop); ?>"
-                 data-item-xs="<?php echo esc_attr($col_xs); ?>" data-item-sm="<?php echo esc_attr($col_sm); ?>"
-                 data-item-md="<?php echo esc_attr($col_md); ?>" data-item-lg="<?php echo esc_attr($col_lg); ?>"
-                 data-margin="<?php echo esc_attr($margin); ?>">
+                data-autoplay="<?php echo esc_attr($autoplay); ?>" data-loop="<?php echo esc_attr($loop); ?>"
+                data-item-xs="<?php echo esc_attr($col_xs); ?>" data-item-sm="<?php echo esc_attr($col_sm); ?>"
+                data-item-md="<?php echo esc_attr($col_md); ?>" data-item-lg="<?php echo esc_attr($col_lg); ?>"
+                data-margin="<?php echo esc_attr($margin); ?>">
                 <?php if (isset($locations)):
                     ?>
                     <?php for ($i = 0; $i < $limit; $i++):
-                    if (!empty($locations[$i])) {
-                        $key = $locations[$i];
-                        $thumbnail_url = jb_get_location_thum($key);
-                        ?>
-                        <div class="cms-location-item">
-                            <div class="cms-location-parent overlay-gradient">
-                                <div class="cms-location-image"
-                                     style="background-image: url(<?php echo esc_url($thumbnail_url); ?>);"></div>
-                                <a class="cms-location-link"
-                                   href="<?php echo get_term_link($key, 'jobboard-tax-locations'); ?>"></a>
-                                <div class="cms-location-holder">
-                                    <a class="cms-location-more"
-                                       href="<?php echo get_term_link($key, 'jobboard-tax-locations'); ?>"><?php esc_html_e('View Jobs', 'wp-recruitment'); ?></a>
-                                    <h2 class="cms-location-title"><?php echo get_term($key)->name; ?></h2>
+                        if (!empty($locations[$i])) {
+                            $key = $locations[$i];
+                            $thumbnail_url = jb_get_location_thum($key);
+                            $flag = get_term_meta($key, '_flag', true);
+                            $flag_url = is_array($flag) && isset($flag['url']) ? $flag['url'] : '';
+                            ?>
+                            <div class="cms-location-item">
+                                <div class="cms-location-parent overlay-gradient">
+                                    <div class="cms-location-image" style="background-image: url(<?php echo esc_url($thumbnail_url); ?>);">
+                                    </div>
+                                    <a class="cms-location-link" href="<?php echo get_term_link($key, 'jobboard-tax-locations'); ?>"></a>
+                                    <div class="cms-location-holder">
+                                        <a class="cms-location-more"
+                                            href="<?php echo get_term_link($key, 'jobboard-tax-locations'); ?>"><?php esc_html_e('View Jobs', 'wp-recruitment'); ?></a>
+                                        <h2 class="cms-location-title"><?php echo get_term($key)->name; ?></h2>
+                                    </div>
                                 </div>
-                            </div>
-                            <?php
-                            if ($atts['country'] === '0'):
-                                if($location_child == 'show') : ?>
-                                    <div class="cms-child-locations">
-                                        <div class="jb-location-flag" style="background-image: url(<?php echo esc_url(get_term_meta($key, '_flag', true)['url']) ?>);"></div>
-                                        <div class="jb-location-holder">
-                                            <h4><?php echo esc_html__('Jobs in', 'wp-recruitment') . ' ' . esc_attr(get_term($key, 'jobboard-tax-locations')->name) ?></h4>
-                                            <div class="jb-locations-list">
-                                                <?php
-                                                $child_term = jb_get_locations($key, intval($location_child_limit), false);
-                                                foreach ($child_term as $term_child) {
-                                                    $link = get_term_link($term_child, 'jobboard-tax-locations');
-                                                    ?>
-                                                        <a href="<?php echo esc_url($link) ?>"
-                                                           rel="tag"><?php echo esc_html(get_term($term_child)->name) ?></a>
+                                <?php
+                                if ($atts['country'] === '0'):
+                                    if ($location_child == 'show'): ?>
+                                        <div class="cms-child-locations">
+                                            <div class="jb-location-flag"
+                                                style="background-image: url(<?php echo esc_url($flag_url) ?>);">
+                                            </div>
+                                            <div class="jb-location-holder">
+                                                <h4><?php echo esc_html__('Jobs in', 'wp-recruitment') . ' ' . esc_attr(get_term($key, 'jobboard-tax-locations')->name) ?>
+                                                </h4>
+                                                <div class="jb-locations-list">
                                                     <?php
-                                                }
-                                                ?>
-                                                <a class="jb-location-child-more" href="<?php echo add_query_arg('country', $key, get_permalink(jb_get_option('page-locations', 0))) ?>" rel="tag"><?php echo esc_html__('More Locations', 'wp-recruitment') ?></a>
+                                                    $child_term = jb_get_locations($key, intval($location_child_limit), false);
+                                                    foreach ($child_term as $term_child) {
+                                                        $link = get_term_link($term_child, 'jobboard-tax-locations');
+                                                        ?>
+                                                        <a href="<?php echo esc_url($link) ?>"
+                                                            rel="tag"><?php echo esc_html(get_term($term_child)->name) ?></a>
+                                                        <?php
+                                                    }
+                                                    ?>
+                                                    <a class="jb-location-child-more"
+                                                        href="<?php echo add_query_arg('country', $key, get_permalink(jb_get_option('page-locations', 0))) ?>"
+                                                        rel="tag"><?php echo esc_html__('More Locations', 'wp-recruitment') ?></a>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    <?php endif; ?>
                                 <?php endif; ?>
-                            <?php endif; ?>
-                        </div>
-                    <?php } ?>
-                <?php endfor; ?>
+                            </div>
+                        <?php } ?>
+                    <?php endfor; ?>
                 <?php endif; ?>
             </div>
-            <?php if($view_all == 'show') : ?>
+            <?php if ($view_all == 'show'): ?>
                 <div class="view-all-locations">
                     <a class="btn"
-                       href="<?php echo get_permalink(jb_get_option('page-locations', 0)) ?>"><?php echo esc_html__('View All Locations', 'wp-recruitment') ?></a>
+                        href="<?php echo get_permalink(jb_get_option('page-locations', 0)) ?>"><?php echo esc_html__('View All Locations', 'wp-recruitment') ?></a>
                 </div>
             <?php endif; ?>
         </div>
@@ -90,33 +96,34 @@ if (function_exists('jb_get_locations')) {
                 <?php if (isset($locations)):
                     ?>
                     <?php for ($i = 0; $i < $limit; $i++):
-                    if (!empty($locations[$i])) {
-                        $key = $locations[$i];
-                        $thumbnail_url = jb_get_location_thum($key);
-                        ?>
-                        <div class="col-lg-<?php echo esc_attr($col_lg_class); ?> col-md-<?php echo esc_attr($col_md_class); ?> col-sm-<?php echo esc_attr($col_sm_class); ?> col-xs-<?php echo esc_attr($col_xs_class); ?>">
-                            <div class="cms-location-item">
-                                <div class="cms-location-parent overlay-gradient">
-                                    <div class="cms-location-image"
-                                         style="background-image: url(<?php echo esc_url($thumbnail_url); ?>);"></div>
-                                    <a class="cms-location-link"
-                                       href="<?php echo get_term_link($key, 'jobboard-tax-locations'); ?>"></a>
-                                    <div class="cms-location-holder">
-                                        <a class="cms-location-more"
-                                           href="<?php echo get_term_link($key, 'jobboard-tax-locations'); ?>"><?php esc_html_e('View Jobs', 'wp-recruitment'); ?></a>
-                                        <h2 class="cms-location-title"><?php echo get_term($key)->name; ?></h2>
+                        if (!empty($locations[$i])) {
+                            $key = $locations[$i];
+                            $thumbnail_url = jb_get_location_thum($key);
+                            ?>
+                            <div
+                                class="col-lg-<?php echo esc_attr($col_lg_class); ?> col-md-<?php echo esc_attr($col_md_class); ?> col-sm-<?php echo esc_attr($col_sm_class); ?> col-xs-<?php echo esc_attr($col_xs_class); ?>">
+                                <div class="cms-location-item">
+                                    <div class="cms-location-parent overlay-gradient">
+                                        <div class="cms-location-image"
+                                            style="background-image: url(<?php echo esc_url($thumbnail_url); ?>);"></div>
+                                        <a class="cms-location-link"
+                                            href="<?php echo get_term_link($key, 'jobboard-tax-locations'); ?>"></a>
+                                        <div class="cms-location-holder">
+                                            <a class="cms-location-more"
+                                                href="<?php echo get_term_link($key, 'jobboard-tax-locations'); ?>"><?php esc_html_e('View Jobs', 'wp-recruitment'); ?></a>
+                                            <h2 class="cms-location-title"><?php echo get_term($key)->name; ?></h2>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    <?php } ?>
-                <?php endfor; ?>
+                        <?php } ?>
+                    <?php endfor; ?>
                 <?php endif; ?>
             </div>
-            <?php if($view_all == 'show') : ?>
+            <?php if ($view_all == 'show'): ?>
                 <div class="view-all-locations">
                     <a class="btn"
-                       href="<?php echo get_permalink(jb_get_option('page-locations', 0)) ?>"><?php echo esc_html__('View All Locations', 'wp-recruitment') ?></a>
+                        href="<?php echo get_permalink(jb_get_option('page-locations', 0)) ?>"><?php echo esc_html__('View All Locations', 'wp-recruitment') ?></a>
                 </div>
             <?php endif; ?>
         </div>

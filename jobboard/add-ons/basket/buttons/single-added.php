@@ -22,5 +22,5 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <a href="<?php echo esc_url($basket_url); ?>" class="btn btn-default btn-xlg basket-added">
     <i class="fa fa-shopping-cart cart"></i>
-    <span class="added"><?php esc_attr_e('Already In Job Basket', 'wp-recruitment'); ?></span>
+    <span class="added"><?php esc_html_e('Already In Job Basket', 'wp-recruitment'); ?></span>
 </a>

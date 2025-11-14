@@ -22,9 +22,9 @@ class CMS_TextBox_Widget extends WP_Widget {
 
         <?php if(!empty($title)) : ?>
             <div class="cms-job-cv widget <?php echo esc_attr($box_color); ?>">
-                <h3><?php echo esc_attr( $title ); ?></h3>
-                <div class="cms-job-cv-content"><?php echo esc_attr( $content ); ?></div>
-                <a class="btn" href="<?php echo esc_url($button_link); ?>"><?php echo esc_attr( $button_text ); ?></a>
+                <h3><?php echo esc_html( $title ); ?></h3>
+                <div class="cms-job-cv-content"><?php echo esc_html( $content ); ?></div>
+                <a class="btn" href="<?php echo esc_url($button_link); ?>"><?php echo esc_html( $button_text ); ?></a>
             </div>
     <?php endif; }
 

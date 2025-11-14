@@ -44,7 +44,7 @@
                     ?>
                     <a href="" class=""></a>
                     <div class="cms-button-wrapper style-btn-default">
-                        <a class="<?php echo esc_attr($class_btn);?>" href="<?php echo esc_url($atts['button_link']);?>"><span class="btn-text"><?php echo esc_attr($atts['button_text']);?></span></a>
+                        <a class="<?php echo esc_attr($class_btn);?>" href="<?php echo esc_url($atts['button_link']);?>"><span class="btn-text"><?php echo esc_html($atts['button_text']);?></span></a>
                     </div>
                 </div>
             <?php endif;?>

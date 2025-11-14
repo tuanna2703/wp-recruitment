@@ -27,7 +27,7 @@ extract(shortcode_atts(array(
         <?php switch ($icon_align) {
             case 'right':
                 ?>
-                    <span><?php echo esc_attr($button_text); ?></span>
+                    <span><?php echo esc_html($button_text); ?></span>
                     <?php if( $icon_custom ): ?>
                         <i class="<?php echo esc_attr($icon_custom);?>"></i>
                         <?php else: if( $iconClass ): ?>
@@ -45,7 +45,7 @@ extract(shortcode_atts(array(
                             <i class="<?php echo esc_attr($iconClass);?>"></i>
                         <?php endif; ?>
                     <?php endif;?>
-                    <span><?php echo esc_attr($button_text); ?></span>
+                    <span><?php echo esc_html($button_text); ?></span>
                 <?php
                 break;
         }?>

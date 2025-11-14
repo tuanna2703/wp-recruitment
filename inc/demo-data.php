@@ -23,9 +23,8 @@ function recruitment_replace_theme_options(){
 }
 
 add_filter('ef3-enable-create-demo', 'recruitment_enable_create_demo');
-
 function recruitment_enable_create_demo(){
-    return false;
+    return defined('DEV_MODE') && DEV_MODE == true;
 }
 
 add_action('ef3-export-finish', 'recruitment_export_finish');

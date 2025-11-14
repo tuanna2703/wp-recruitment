@@ -23,6 +23,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 <div class="jb-s-item search-key">
 	<label class="label-hidden"><?php echo esc_html__('Job Title', 'wp-recruitment')?></label>
 	<div class="jb-input-wrap">
-		<input type="search" name="s" value="<?php echo get_search_query(); ?>" placeholder="<?php esc_html_e('e.g Digital Designer', 'wp-recruitment'); ?>">
+		<input type="search" name="s" value="<?php echo get_search_query(); ?>" placeholder="<?php esc_attr_e('e.g Digital Designer', 'wp-recruitment'); ?>">
 	</div>
 </div>

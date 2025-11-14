@@ -12,24 +12,24 @@ if (!defined('ABSPATH')) {
 $job_count = count_user_posts(get_the_author_meta('ID'), 'jobboard-post-jobs');
 //$avt = get_the_author_meta('user_avatar');
 $job_count_layout = $job_count > 1 ? $job_count . ' ' . esc_html__('Active Positions', 'wp-recruitment') : $job_count . ' ' . esc_html__('Active Position', 'wp-recruitment');
-global $opt_theme_options;
 $page_archive_url = !empty(jb_get_option('page-jobs', '')) ? get_permalink(jb_get_option('page-jobs')) : "#";
 $customer_url = get_post_meta(get_the_ID(), '_customer_url', true);
-$customer_url = !empty($customer_url)?$customer_url:get_the_author_meta('url');
+$customer_url = !empty($customer_url) ? $customer_url : get_the_author_meta('url');
 
-if ($opt_theme_options['single_job_auth'] == 'show' && current_user_can('administrator')) : ?>
+if (recruitment_get_opt('single_job_auth', 'show') == 'show' && current_user_can('administrator')): ?>
     <div class="col-xs-12">
         <div class="job-single-author clearfix">
             <div class="job-single-author-image">
-                <?php echo get_avatar( get_the_author_meta('ID'), 300 ); ?>
+                <?php echo get_avatar(get_the_author_meta('ID'), 300); ?>
             </div>
             <div class="job-single-author-holder">
                 <h3><?php echo get_the_author() ?></h3>
-                <span class="job-single-author-post"><?php echo esc_attr($job_count_layout) ?></span>
+                <span class="job-single-author-post"><?php echo esc_html($job_count_layout) ?></span>
                 <div class="job-single-author-meta">
-                    <a href="<?php echo add_query_arg('employer_id', get_the_author_meta('ID'), $page_archive_url) ?>"><?php echo esc_html__('View More Jobs', 'wp-recruitment') ?></a>
+                    <a
+                        href="<?php echo add_query_arg('employer_id', get_the_author_meta('ID'), $page_archive_url) ?>"><?php echo esc_html__('View More Jobs', 'wp-recruitment') ?></a>
                     <a href="<?php echo esc_url($customer_url); ?>"
-                       target="_blank"><?php echo esc_html__('Visit Website', 'wp-recruitment') ?></a>
+                        target="_blank"><?php echo esc_html__('Visit Website', 'wp-recruitment') ?></a>
                 </div>
             </div>
         </div>

@@ -23,7 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <div class="jb-profile-actions">
     <?php wp_nonce_field( 'edit_profile' ); ?>
-    <input type="submit" class="button btn btn-default btn-xlg" name="jb-edit-profile" value="<?php esc_html_e('Save changes', 'wp-recruitment'); ?>">
+    <input type="submit" class="button btn btn-default btn-xlg" name="jb-edit-profile" value="<?php esc_attr_e('Save changes', 'wp-recruitment'); ?>">
     <input type="hidden" name="action" value="edit_profile">
     <input type="hidden" name="form" value="jobboard-form">
 </div>

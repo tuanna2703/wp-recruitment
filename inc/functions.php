@@ -16,13 +16,12 @@ require_once get_template_directory() . '/inc/demo-data.php';
 /* lip font-awesome */
 require_once get_template_directory() . '/inc/libs/font-awesome.php';
 
-/* load theme options. */
 add_action('after_setup_theme', function () {
+    /* load theme options. */
     require_once get_template_directory() . '/inc/options/function.options.php';
+    /* load mata options */
+    require_once get_template_directory() . '/inc/options/meta-options.php';
 });
-
-/* load mata options */
-require_once get_template_directory() . '/inc/options/meta-options.php';
 
 /* load template functions */
 require_once get_template_directory() . '/inc/template.functions.php';

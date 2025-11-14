@@ -53,8 +53,22 @@ function recruitment_setup()
 	// Add woocommerce
 	add_theme_support('woocommerce');
 
-	// Adds custom header
-	add_theme_support('custom-header');
+	add_theme_support(
+		'html5',
+		[
+			'caption',
+		]
+	);
+
+	add_theme_support(
+		'custom-logo',
+		[
+			'height' => 100,
+			'width' => 350,
+			'flex-height' => true,
+			'flex-width' => true,
+		]
+	);
 
 	// Adds RSS feed links to <head> for posts and comments.
 	add_theme_support('automatic-feed-links');
@@ -130,73 +144,61 @@ if (class_exists('WPBakeryShortCode')) {
 	add_filter(VC_SHORTCODE_CUSTOM_CSS_FILTER_TAG, 'recruitment_vc_shortcode_css_class', 10, 3);
 }
 
-/* Include CMS Shortcode */
-function recruitment_shortcodes_list()
-{
-	$recruitment_shortcodes_list = array(
-		'cms_carousel',
-		'cms_grid',
-		'cms_fancybox_single',
-		'cms_counter_single',
-		'cms_progressbar',
-	);
-
-	return $recruitment_shortcodes_list;
-}
-
-function recruitment_get_post_meta($post_id = 0)
-{
-	global $post;
-	if (!$post_id)
-		$post_id = $post->ID;
-
-	$_post_meta = maybe_unserialize(get_post_meta($post_id, 'opt_meta_options', true));
-
-	if ($_post_meta)
-		return $_post_meta;
-
-	return null;
-}
-
 /**
  * Add new elements for VC
  * 
  * @author FOX
  */
 
-function recruitment_vc_elements()
+function recruitment_custom_vc()
 {
-
 	if (class_exists('CmsShortCode')) {
-		add_filter('cms-shorcode-list', 'recruitment_shortcodes_list');
+		add_filter('cms-shorcode-list', function () {
+			return [
+				'cms_carousel',
+				'cms_grid',
+				'cms_fancybox_single',
+				'cms_counter_single',
+				'cms_progressbar',
+			];
+		});
 
-		require_once(get_template_directory() . '/inc/elements/button/cms_button.php');
-		require_once(get_template_directory() . '/inc/elements/googlemap/cms_googlemap.php');
-		require_once(get_template_directory() . '/inc/elements/heading/cms_heading.php');
-		require_once(get_template_directory() . '/inc/elements/process/cms_process.php');
-		require_once(get_template_directory() . '/inc/elements/client/cms_client.php');
-		require_once(get_template_directory() . '/inc/elements/pricing/cms_pricing.php');
-		require_once(get_template_directory() . '/inc/elements/gettouch/cms_gettouch.php');
-		require_once(get_template_directory() . '/inc/elements/jobboard/cms-specialism-list.php');
-		require_once(get_template_directory() . '/inc/elements/jobboard/cms-jobs.php');
-		require_once(get_template_directory() . '/inc/elements/jobboard/cms-jobs-grid.php');
-		require_once(get_template_directory() . '/inc/elements/jobboard/cms_locations.php');
-		require_once(get_template_directory() . '/inc/elements/jobboard/cms-cv.php');
-		require_once(get_template_directory() . '/inc/elements/jobboard/cms-jb-resources.php');
-		require_once(get_template_directory() . '/inc/elements/latestnews/cms_latestnews.php');
-		require_once(get_template_directory() . '/inc/elements/newsletter/cms_newsletter.php');
-		require_once(get_template_directory() . '/inc/elements/textbox/cms_textbox.php');
+		require_once get_template_directory() . '/inc/elements/button/cms_button.php';
+		require_once get_template_directory() . '/inc/elements/googlemap/cms_googlemap.php';
+		require_once get_template_directory() . '/inc/elements/heading/cms_heading.php';
+		require_once get_template_directory() . '/inc/elements/process/cms_process.php';
+		require_once get_template_directory() . '/inc/elements/client/cms_client.php';
+		require_once get_template_directory() . '/inc/elements/pricing/cms_pricing.php';
+		require_once get_template_directory() . '/inc/elements/gettouch/cms_gettouch.php';
+		require_once get_template_directory() . '/inc/elements/jobboard/cms-specialism-list.php';
+		require_once get_template_directory() . '/inc/elements/jobboard/cms-jobs.php';
+		require_once get_template_directory() . '/inc/elements/jobboard/cms-jobs-grid.php';
+		require_once get_template_directory() . '/inc/elements/jobboard/cms_locations.php';
+		require_once get_template_directory() . '/inc/elements/jobboard/cms-cv.php';
+		require_once get_template_directory() . '/inc/elements/jobboard/cms-jb-resources.php';
+		require_once get_template_directory() . '/inc/elements/latestnews/cms_latestnews.php';
+		require_once get_template_directory() . '/inc/elements/newsletter/cms_newsletter.php';
+		require_once get_template_directory() . '/inc/elements/textbox/cms_textbox.php';
 	}
+
+	vc_add_param(
+		"vc_tta_section",
+		array(
+			"type" => "css_editor",
+			"param_name" => 'body_css',
+			"group" => esc_html__("Style", 'wp-recruitment'),
+		)
+	);
 }
-add_action('vc_before_init', 'recruitment_vc_elements');
+add_action('vc_before_init', 'recruitment_custom_vc');
 
 /* Add widgets */
-require_once(get_template_directory() . '/inc/widgets/textbox.php');
-require_once(get_template_directory() . '/inc/widgets/recent-posts.php');
+require_once get_template_directory() . '/inc/widgets/textbox.php';
+require_once get_template_directory() . '/inc/widgets/recent-posts.php';
 
 /* Job */
-require_once(get_template_directory() . '/inc/jobboard/wpl-template-functions.php');
-require_once(get_template_directory() . '/inc/jobboard/wpl-template-hooks.php');
+require_once get_template_directory() . '/inc/jobboard/wpl-template-functions.php';
+require_once get_template_directory() . '/inc/jobboard/wpl-template-hooks.php';
 
 /**
  * Enqueue scripts and styles for front-end.
@@ -293,7 +295,7 @@ add_action('wp_enqueue_scripts', 'recruitment_front_end_scripts');
  */
 function recruitment_admin_scripts()
 {
-
+	$theme = wp_get_theme( get_template() );
 	/* Loads Bootstrap stylesheet. */
 	wp_enqueue_style('font-awesome', get_template_directory_uri() . '/assets/css/font-awesome.min.css', array(), '4.3.0');
 
@@ -302,8 +304,14 @@ function recruitment_admin_scripts()
 	/* load js for edit post. */
 	if ($screen->post_type == 'post') {
 		/* post format select. */
-		wp_enqueue_script('post-format', get_template_directory_uri() . '/assets/js/post-format.js', array(), '1.0.0', true);
+		wp_enqueue_script('post-format', get_template_directory_uri() . '/assets/js/post-format.js', array(), $theme->get('Version'), true);
 	}
+
+	wp_enqueue_style('recruitment_admin_style', get_template_directory_uri() . '/assets/css/admin.css', [], $theme->get('Version'));
+
+	wp_enqueue_style('recruitment-get-started-css', get_template_directory_uri() . '/assets/css/get-started.css');
+	wp_enqueue_script('recruitment-get-started-js', get_template_directory_uri() . '/assets/js/get-started.js', ['jquery'], $theme->get('Version'), true);
+	wp_localize_script('recruitment-get-started-js', 'main_data', array('ajax_url' => admin_url('admin-ajax.php')));
 }
 
 add_action('admin_enqueue_scripts', 'recruitment_admin_scripts');
@@ -317,9 +325,6 @@ add_action('admin_enqueue_scripts', 'recruitment_admin_scripts');
  */
 function recruitment_widgets_init()
 {
-
-	global $opt_theme_options;
-
 	register_sidebar(array(
 		'name' => esc_html__('Main Sidebar', 'wp-recruitment'),
 		'id' => 'main-sidebar',
@@ -430,9 +435,9 @@ function recruitment_widgets_init()
 	));
 
 	/* Footer Top */
-	if (!empty($opt_theme_options['footer-top-column'])) {
-
-		for ($i = 1; $i <= $opt_theme_options['footer-top-column']; $i++) {
+	$footer_top_column = intval(recruitment_get_opt('footer-top-column', 4));
+	if ($footer_top_column > 0) {
+		for ($i = 1; $i <= $footer_top_column; $i++) {
 			register_sidebar(array(
 				'name' => sprintf(esc_html__('Footer Top - Column %s', 'wp-recruitment'), $i),
 				'id' => 'sidebar-footer-top-' . $i,
@@ -621,21 +626,7 @@ function recruitment_ago($time)
 }
 
 /* core functions. */
-require_once(get_template_directory() . '/inc/functions.php');
-
-
-add_action('vc_before_init', 'recruitment_integrate_with_vc');
-function recruitment_integrate_with_vc()
-{
-	vc_add_param(
-		"vc_tta_section",
-		array(
-			"type" => "css_editor",
-			"param_name" => 'body_css',
-			"group" => esc_html__("Style", 'wp-recruitment'),
-		)
-	);
-}
+require_once get_template_directory() . '/inc/functions.php';
 
 if (!function_exists('recruitment_fonts_url')):
 	/**
@@ -668,16 +659,97 @@ if (!function_exists('recruitment_fonts_url')):
 	}
 endif;
 
-/* Add Google font */
-function recruitment_add_google_fonts()
-{
-	wp_enqueue_style('poppins-google-font', 'https://fonts.googleapis.com/css?family=Poppins:400,400i,700,800', false);
-}
-add_action('wp_enqueue_scripts', 'recruitment_add_google_fonts');
+// /* Add Google font */
+// function recruitment_add_google_fonts()
+// {
+// 	wp_enqueue_style('poppins-google-font', 'https://fonts.googleapis.com/css?family=Poppins:400,400i,700,800', []);
+// }
+// add_action('wp_enqueue_scripts', 'recruitment_add_google_fonts');
 
-/* Update CSS within in Admin */
-function recruitment_admin_style()
+// /* Update CSS within in Admin */
+// function recruitment_admin_style()
+// {
+// 	wp_enqueue_style('recruitment_admin_style', get_template_directory_uri() . '/assets/css/admin.css');
+// }
+// add_action('admin_enqueue_scripts', 'recruitment_admin_style');
+
+/**
+ * Register block styles.
+ */
+if (!function_exists('recruitment_block_styles')):
+	/**
+	 * Register custom block styles
+	 *
+	 * @since Dianne 1.0
+	 * @return void
+	 */
+	function recruitment_block_styles()
+	{
+		register_block_style(
+			'core/recruitment',
+			array(
+				'name' => 'arrow-icon-recruitment',
+				'label' => __('Arrow icon', 'wp-recruitment')
+			)
+		);
+	}
+endif;
+//add_action( 'init', 'recruitment_block_styles' );
+/**
+ * Register pattern categories.
+ */
+if (!function_exists('recruitment_pattern_categories')):
+	/**
+	 * Register pattern categories
+	 *
+	 * @since 1.0
+	 * @return void
+	 */
+	function recruitment_pattern_categories()
+	{
+		register_block_pattern_category(
+			'recruitment_page',
+			array(
+				'label' => _x('Pages', 'Block pattern category', 'wp-recruitment'),
+				'description' => __('A collection of full page layouts.', 'wp-recruitment'),
+			)
+		);
+	}
+endif;
+//add_action( 'init', 'recruitment_pattern_categories' );
+/**
+ * Registers an editor stylesheet for the theme.
+ */
+function recruitment_theme_add_editor_styles()
 {
-	wp_enqueue_style('recruitment_admin_style', get_template_directory_uri() . '/assets/css/admin.css');
+	add_editor_style('custom-editor-style.css');
 }
-add_action('admin_enqueue_scripts', 'recruitment_admin_style');
+//add_action( 'admin_init', 'recruitment_theme_add_editor_styles' );
+//register_block_style
+//register_block_pattern
+if (!function_exists('recruitment_setup_gutenblocks')):
+	/**
+	 * Sets up theme defaults and registers support for various WordPress features.
+	 *
+	 * Note that this function is hooked into the after_setup_theme hook, which
+	 * runs before the init hook. The init hook is too late for some features, such
+	 * as indicating support for post thumbnails.
+	 */
+	function recruitment_setup_gutenblocks()
+	{
+		/**
+		 * Gutenberg
+		 * Block 
+		 * */
+		add_theme_support("wp-block-styles");
+		add_theme_support("responsive-embeds");
+		add_theme_support("align-wide");
+		add_theme_support("custom-header", []);
+		add_theme_support("custom-background", []);
+	}
+endif;
+
+/*
+ * Get Started
+ */
+require_once get_template_directory() . '/inc/get-started.php';

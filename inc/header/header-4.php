@@ -4,8 +4,9 @@
  * @package : CMSSuperHeroes
  * @author : Fox
  */
-global $opt_theme_options, $opt_meta_options;
+global $opt_meta_options;
 
+$menu_style = $opt_meta_options['menu_style'] ?? '';
 ?>
 <div id="cshero-header-inner" class="header-1 custom-header4 header-top">
     <div id="cshero-header-wrapper">
@@ -15,16 +16,17 @@ global $opt_theme_options, $opt_meta_options;
                     <div id="cshero-header-logo">
                         <?php recruitment_header_logo(); ?>
                     </div><!-- #site-logo -->
-                    <div id="cshero-header-navigation" class="cshero-header-navigation <?php echo esc_attr($opt_meta_options['menu_style']); ?>">
+                    <div id="cshero-header-navigation"
+                        class="cshero-header-navigation <?php echo esc_attr($menu_style); ?>">
                         <div class="cshero-header-navigation-inner clearfix">
                             <div id="cshero-header-navigation-primary">
 
                                 <div class="cshero-navigation-right">
-                                    <?php if(is_active_sidebar('nav')): ?>
+                                    <?php if (is_active_sidebar('nav')): ?>
                                         <?php dynamic_sidebar('nav'); ?>
                                     <?php endif; ?>
                                 </div>
-                                
+
                                 <nav id="site-navigation" class="main-navigation">
                                     <?php recruitment_header_navigation_primary(); ?>
                                 </nav><!-- #site-navigation -->
