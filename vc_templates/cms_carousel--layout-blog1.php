@@ -3,7 +3,7 @@
 ?>
 <div class="cms-carousel-wrap">
     <?php if(!empty($carousel_title)) { ?>
-        <h3><?php echo esc_attr($carousel_title); ?></h3>
+        <h3><?php echo esc_html($carousel_title); ?></h3>
     <?php } ?>
     <div class="cms-carousel cms-carousel-blog-layout1 <?php echo esc_attr($atts['template']);?>" id="<?php echo esc_attr($atts['html_id']);?>">
         <?php

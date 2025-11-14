@@ -22,6 +22,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <a href="<?php echo esc_url($app_url); ?>" class="button basket-applied">
     <i class="fa fa-check-square-o"></i>
-    <span class="added"><?php esc_attr_e('Applied', 'wp-recruitment'); ?></span>
+    <span class="added"><?php esc_html_e('Applied', 'wp-recruitment'); ?></span>
 </a>
 

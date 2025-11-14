@@ -62,8 +62,8 @@ if( empty($payments)){
             do_action('jobboard_package_payment_actions');
             ?>
 
-            <input type="submit" name="package-checkout" class="button btn btn-xlg submit-button" value="<?php esc_html_e('Process Payment', 'wp-recruitment') ?>">
-            <input type="submit" name="package-checkout-submit-free" class="button btn btn-xlg submit-button hide" value="<?php esc_html_e('Submit', 'wp-recruitment') ?>" style="float: none;">
+            <input type="submit" name="package-checkout" class="button btn btn-xlg submit-button" value="<?php esc_attr_e('Process Payment', 'wp-recruitment') ?>">
+            <input type="submit" name="package-checkout-submit-free" class="button btn btn-xlg submit-button hide" value="<?php esc_attr_e('Submit', 'wp-recruitment') ?>" style="float: none;">
         </div>
     </div>
     <?php wp_nonce_field( 'package_checkout' ); ?>

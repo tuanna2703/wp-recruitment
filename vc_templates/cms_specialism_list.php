@@ -64,7 +64,7 @@ switch ($atts['specialism_layout']) {
     case "layout2": ?>
         <div class="jb-specialism-list2 col-same <?php echo esc_html($atts['custom_class']); ?> clearfix">
             <?php if(!empty($atts['title_text'])) : ?>
-                <h3><?php echo esc_attr( $atts['title_text'] ); ?></h3>
+                <h3><?php echo esc_html( $atts['title_text'] ); ?></h3>
             <?php endif; ?>
             <?php if(!empty($content)): ?>
                 <ul class="row">
@@ -85,7 +85,7 @@ switch ($atts['specialism_layout']) {
             <div class="jb-specialism-wrap">
                 <div class="jb-specialism-list3 box-modern <?php echo esc_html($atts['custom_class']); ?> clearfix">
                     <?php if(!empty($atts['title_text'])) : ?>
-                        <h3><?php echo esc_attr( $atts['title_text'] ); ?></h3>
+                        <h3><?php echo esc_html( $atts['title_text'] ); ?></h3>
                     <?php endif; ?>
                     
                     <div class="jb-specialism-inner row">
@@ -109,7 +109,7 @@ switch ($atts['specialism_layout']) {
             <div class="jb-specialism-wrap">
                 <div class="jb-specialism-list4 <?php echo esc_html($atts['custom_class']); ?> clearfix">
                     <?php if(!empty($atts['title_text'])) : ?>
-                        <h3><?php echo esc_attr( $atts['title_text'] ); ?></h3>
+                        <h3><?php echo esc_html( $atts['title_text'] ); ?></h3>
                     <?php endif; ?>
                     
                     <div class="jb-specialism-inner">
@@ -133,7 +133,7 @@ switch ($atts['specialism_layout']) {
             <div class="jb-specialism-wrap box-modern">
                 <div class="jb-specialism-list5 <?php echo esc_html($atts['custom_class']); ?> clearfix">
                     <?php if(!empty($atts['title_text'])) : ?>
-                        <h3><?php echo esc_attr( $atts['title_text'] ); ?></h3>
+                        <h3><?php echo esc_html( $atts['title_text'] ); ?></h3>
                     <?php endif; ?>
                     
                     <div class="jb-specialism-inner">

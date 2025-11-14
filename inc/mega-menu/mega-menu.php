@@ -177,7 +177,7 @@ function wp_recruitment_add_menu_icon_fields( $item_id, $item, $depth, $args ) {
         <label for="edit-<?php echo ''.$key . '-' . $item_id; ?>">
             <?php echo esc_html( $title ); ?><br />
             <input type="text" value="<?php echo ''.$value; ?>" id="edit-<?php echo ''.$key . '-' . $item_id; ?>" class=" <?php echo ''.$key; ?>" name="<?php echo ''.$key . "[" . $item_id . "]"; ?>" />
-            <input alt="#TB_inline?height=auto&width=auto&inlineId=<?php echo ''.$key . '-' . $item_id . '-popup'; ?>" title="<?php esc_html_e( 'Click to browse icon', 'wp-recruitment' ) ?>" class="thickbox button-secondary submit-add-to-menu" type="button" value="<?php esc_html_e( 'Browse Icon', 'wp-recruitment' ) ?>" />
+            <input alt="#TB_inline?height=auto&width=auto&inlineId=<?php echo ''.$key . '-' . $item_id . '-popup'; ?>" title="<?php esc_attr_e( 'Click to browse icon', 'wp-recruitment' ) ?>" class="thickbox button-secondary submit-add-to-menu" type="button" value="<?php esc_attr_e( 'Browse Icon', 'wp-recruitment' ) ?>" />
             <a class="button btn_clear button-primary" href="javascript: void(0);">Clear</a>
             <span class="icon-preview  icon-preview<?php echo '-' . $item_id; ?>"><i class=" fa fa-<?php echo ''.$value; ?>"></i></span>
         </label>

@@ -22,7 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 ?>
 
-<form role="search" method="get" class="jb-job-search" action="<?php echo esc_url( home_url( '/'  ) ); ?>">
+<form method="get" class="jb-job-search" action="<?php echo esc_url( home_url( '/'  ) ); ?>">
 	<div>
 		<label class="screen-reader-text" for="jb-job-search-field"><?php esc_html_e( 'Search for:', 'wp-recruitment' ); ?></label>
 		<input type="search" id="jb-job-search-field" class="search-field" placeholder="<?php echo esc_attr_x( 'Enter Keywords', 'placeholder', 'wp-recruitment' ); ?>" value="<?php echo get_search_query(); ?>" name="s" title="<?php echo esc_attr_x( 'Search for:', 'label', 'wp-recruitment' ); ?>" />

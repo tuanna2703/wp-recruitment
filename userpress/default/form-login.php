@@ -17,10 +17,10 @@ if (! defined ( 'ABSPATH' )) {
 	<div class="login-form">
 		<div class="fields-content">
 			<div class="field-group">
-				<input id="user" type="text" class="input user_name" placeholder="Username" data-validate="<?php esc_html_e('Required Field', 'wp-recruitment'); ?>">
+				<input id="user" type="text" class="input user_name" placeholder="Username" data-validate="<?php esc_attr_e('Required Field', 'wp-recruitment'); ?>">
 			</div>
 			<div class="field-group">
-				<input id="pass" type="password" class="input password" placeholder="Password" data-validate="<?php esc_html_e('Required Field', 'wp-recruitment'); ?>">
+				<input id="pass" type="password" class="input password" placeholder="Password" data-validate="<?php esc_attr_e('Required Field', 'wp-recruitment'); ?>">
 			</div>
 			<div class="field-group field-end">
 				<a class="forget" href="<?php echo wp_lostpassword_url(get_permalink()); ?>"><?php esc_html_e('Forgot your password ?', 'wp-recruitment') ?></a>

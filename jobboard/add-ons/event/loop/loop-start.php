@@ -15,20 +15,13 @@
  * @version     1.0.0
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
+if (!defined('ABSPATH')) {
 	exit; // Exit if accessed directly
 }
-global $opt_theme_options;
-$event_style = '';
-$event_style = (isset($_GET['event-style'])) ? trim($_GET['event-style']) : $opt_theme_options['event_style'];
-$event_class = '';
-if ($event_style == 'event-classic') {
-    $event_class = 'event-classic';
-} else {
-	$event_class = 'event-modern';
-}
 
+$event_style = recruitment_get_opt('event_style', 'event-classic');
+$event_style = isset($_GET['event-style']) && in_array($_GET['event-style'], ['event-classic', 'event-modern']) ? $_GET['event-style'] : $event_style;
 ?>
 
-<div class="jobboard-archive-loop jobboard-event-wrap <?php echo esc_attr( $event_style ); ?>">
+<div class="jobboard-archive-loop jobboard-event-wrap <?php echo esc_attr($event_style); ?>">
 	<div class="container">

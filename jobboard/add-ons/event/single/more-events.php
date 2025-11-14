@@ -18,7 +18,7 @@
                     <div class="loop-title">
                         <h2 class="entry-title">
                             <a href="<?php echo get_permalink($event->ID) ?>"
-                               rel="bookmark"><?php echo esc_attr($event->post_title) ?></a>
+                               rel="bookmark"><?php echo esc_html($event->post_title) ?></a>
                         </h2>
                     </div>
                 </div>

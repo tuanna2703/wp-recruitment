@@ -8,50 +8,54 @@
  * @package 	ReduxFramework/Templates
  * @version:    3.5.4
  */
-global $opt_theme_options;
+
+$main_logo = recruitment_get_opt('main_logo', [
+    'url' => get_template_directory_uri() . '/assets/images/logo.png'
+]);
 ?>
 <div class="redux-sidebar">
-	<div class="redux-sidebar-head">
-		<div class="abcore-redux-logo"><img src="<?php echo esc_url($opt_theme_options['main_logo']['url']); ?>" /></div>
-		<span>
-			<?php echo esc_attr( wp_get_theme()->version ); ?>
-		</span>
-	</div>
+    <div class="redux-sidebar-head">
+        <div class="abcore-redux-logo"><img src="<?php echo esc_url($main_logo['url']); ?>" />
+        </div>
+        <span>
+            <?php echo esc_attr(wp_get_theme()->version); ?>
+        </span>
+    </div>
     <ul class="redux-group-menu">
-    <?php
-            foreach ( $this->parent->sections as $k => $section ) {
-                $title = isset ( $section[ 'title' ] ) ? $section[ 'title' ] : '';
+        <?php
+        foreach ($this->parent->sections as $k => $section) {
+            $title = isset($section['title']) ? $section['title'] : '';
 
-                $skip_sec = false;
-                foreach ( $this->parent->hidden_perm_sections as $num => $section_title ) {
-                    if ( $section_title == $title ) {
-                        $skip_sec = true;
-                    }
-                }
-
-                if ( isset ( $section[ 'customizer_only' ] ) && $section[ 'customizer_only' ] == true ) {
-                    continue;
-                }
-
-                if ( false == $skip_sec ) {
-                    echo ''.$this->parent->section_menu ( $k, $section );
-                    $skip_sec = false;
+            $skip_sec = false;
+            foreach ($this->parent->hidden_perm_sections as $num => $section_title) {
+                if ($section_title == $title) {
+                    $skip_sec = true;
                 }
             }
 
-            /**
-             * action 'redux-page-after-sections-menu-{opt_name}'
-             *
-             * @param object $this ReduxFramework
-             */
-            do_action ( "redux-page-after-sections-menu-{$this->parent->args[ 'opt_name' ]}", $this );
+            if (isset($section['customizer_only']) && $section['customizer_only'] == true) {
+                continue;
+            }
 
-            /**
-             * action 'redux/page/{opt_name}/menu/after'
-             *
-             * @param object $this ReduxFramework
-             */
-            do_action ( "redux/page/{$this->parent->args[ 'opt_name' ]}/menu/after", $this );
-    ?>
+            if (false == $skip_sec) {
+                echo '' . $this->parent->section_menu($k, $section);
+                $skip_sec = false;
+            }
+        }
+
+        /**
+         * action 'redux-page-after-sections-menu-{opt_name}'
+         *
+         * @param object $this ReduxFramework
+         */
+        do_action("redux-page-after-sections-menu-{$this->parent->args['opt_name']}", $this);
+
+        /**
+         * action 'redux/page/{opt_name}/menu/after'
+         *
+         * @param object $this ReduxFramework
+         */
+        do_action("redux/page/{$this->parent->args['opt_name']}/menu/after", $this);
+        ?>
     </ul>
 </div>

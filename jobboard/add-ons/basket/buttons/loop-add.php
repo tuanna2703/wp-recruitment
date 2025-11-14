@@ -25,7 +25,7 @@ $require_login = jb_get_option('add-job-require-login',false);
         data-id="<?php the_ID(); ?>"<?php echo (!is_user_logged_in() && $require_login === '1') ?  ' data-modal="jobboard-login-add-job"' : ''?>>
     <i class="fa fa-shopping-cart cart"></i>
     <i class="fa fa-spinner jobboard-loading" style="display: none"></i>
-    <span class="add"><?php esc_attr_e('Add', 'wp-recruitment'); ?></span>
-    <span class="added" style="display: none"><?php esc_attr_e('Added', 'wp-recruitment'); ?></span>
+    <span class="add"><?php esc_html_e('Add', 'wp-recruitment'); ?></span>
+    <span class="added" style="display: none"><?php esc_html_e('Added', 'wp-recruitment'); ?></span>
 </button>
 

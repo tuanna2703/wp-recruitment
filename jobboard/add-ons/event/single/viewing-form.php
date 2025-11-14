@@ -18,7 +18,7 @@ $duration = je_template_job_duration($event_id);
             </div>
             <span class="je-viewing-close"><i class="zmdi zmdi-close"></i></span>
             <div class="je-viewing-property-item hidden-sm hidden-xs clearfix">
-                <h3><?php echo esc_attr($event->post_title) ?></h3>
+                <h3><?php echo esc_html($event->post_title) ?></h3>
                 <div class="loop-actions row">
                     <div class="loop-duration col-lg-6 col-md-6 col-sm-12 col-xs-12">
                         <?php
@@ -52,12 +52,12 @@ $duration = je_template_job_duration($event_id);
         <div class="je-viewing-form-body">
 
             <input class="je-reg-name" type="text" name="fullname"
-                   placeholder="<?php esc_html_e('Full Name*', 'wp-recruitment'); ?>"
+                   placeholder="<?php esc_attr_e('Full Name*', 'wp-recruitment'); ?>"
                    required>
             <input class="je-reg-email" type="email" name="email"
-                   placeholder="<?php esc_html_e('Email Address*', 'wp-recruitment'); ?>" required>
+                   placeholder="<?php esc_attr_e('Email Address*', 'wp-recruitment'); ?>" required>
             <input class="je-reg-number" type="tel" name="phone"
-                   placeholder="<?php esc_html_e('Contact Number', 'wp-recruitment'); ?>">
+                   placeholder="<?php esc_attr_e('Contact Number', 'wp-recruitment'); ?>">
             <button class="je-btn-reg" type="submit" data-id="<?php echo esc_attr($event_id); ?>"><?php esc_html_e('Register Event', 'wp-recruitment'); ?></button>
             <?php wp_nonce_field('je_register_event', '_wp_nonce_register_event'); ?>
         </div>

@@ -23,6 +23,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 <button class="btn btn-default btn-xlg basket-add" data-id="<?php the_ID(); ?>">
     <i class="fa fa-shopping-cart cart"></i>
     <i class="fa fa-spinner jobboard-loading" style="display: none"></i>
-    <span class="add"><?php esc_attr_e('Add To Job Basket', 'wp-recruitment'); ?></span>
-    <span class="added" style="display: none"><?php esc_attr_e('Ready In Job Basket', 'wp-recruitment'); ?></span>
+    <span class="add"><?php esc_html_e('Add To Job Basket', 'wp-recruitment'); ?></span>
+    <span class="added" style="display: none"><?php esc_html_e('Ready In Job Basket', 'wp-recruitment'); ?></span>
 </button>

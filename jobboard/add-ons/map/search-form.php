@@ -23,8 +23,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 <div class="map-search-control<?php echo esc_attr($active); ?>">
     <div class="map-search-form">
         <div class="search-form">
-            <input class="search-geolocation" type="text" value="" placeholder="<?php esc_html_e('Geo Location', 'wp-recruitment'); ?>">
-            <input class="search-keyword" type="search" value="<?php echo get_search_query(); ?>" placeholder="<?php esc_html_e('Keyword', 'wp-recruitment'); ?>">
+            <input class="search-geolocation" type="text" value="" placeholder="<?php esc_attr_e('Geo Location', 'wp-recruitment'); ?>">
+            <input class="search-keyword" type="search" value="<?php echo get_search_query(); ?>" placeholder="<?php esc_attr_e('Keyword', 'wp-recruitment'); ?>">
             <button class="search-button btn btn-default">
                 <i class="fa fa-search"></i>
                 <i class="fa fa-spinner jobboard-loading" style="display: none"></i>

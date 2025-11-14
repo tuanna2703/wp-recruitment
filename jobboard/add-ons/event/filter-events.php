@@ -20,7 +20,7 @@ $term_list = get_terms(array(
     foreach ($term_list as $term) {
         ?>
         <li class="jb-filter-event-types" id="jb-filter-event-type-<?php echo esc_attr($term->term_id) ?>">
-            <span><?php echo esc_attr($term->name) ?></span>
+            <span><?php echo esc_html($term->name) ?></span>
         </li>
         <?php
     }

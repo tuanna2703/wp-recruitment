@@ -22,5 +22,5 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <div class="loop-deadline">
     <i class="fa fa-lock"></i>
-    <span class="deadline-clock" data-time="<?php echo esc_attr($time); ?>" data-expired="<?php esc_html_e('Expired', 'wp-recruitment'); ?>" title="<?php esc_html_e('Deadline', 'wp-recruitment') ?>"></span>
+    <span class="deadline-clock" data-time="<?php echo esc_attr($time); ?>" data-expired="<?php esc_attr_e('Expired', 'wp-recruitment'); ?>" title="<?php esc_attr_e('Deadline', 'wp-recruitment') ?>"></span>
 </div>

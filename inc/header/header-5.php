@@ -4,13 +4,15 @@
  * @package : CMSSuperHeroes
  * @author : Fox
  */
-global $opt_theme_options;
+
 $j_register = jb_get_option('page-register');
 $j_register_url = get_permalink($j_register);
 
 $j_dashboard = jb_get_option('page-dashboard');
 $j_dashboard_url = get_permalink($j_dashboard);
 
+$view_job_text = recruitment_get_opt('view_job_text', '');
+$view_job_url = recruitment_get_opt('view_job_url', '');
 ?>
 <div id="cshero-header-inner" class="header-1 custom-header5">
     <div id="cshero-header-wrapper">
@@ -34,21 +36,25 @@ $j_dashboard_url = get_permalink($j_dashboard);
                                             foreach (jb_get_lastest_job() as $post_new):
                                                 ?>
                                                 <li>
-                                                    <a href="<?php echo get_permalink($post_new->ID) ?>"><?php echo esc_attr($post_new->post_title) ?></a>
+                                                    <a
+                                                        href="<?php echo get_permalink($post_new->ID) ?>"><?php echo esc_html($post_new->post_title) ?></a>
                                                 </li>
-                                            <?php
+                                                <?php
                                             endforeach;
                                             ?>
                                         </ul>
                                     </div>
-                                <?php
+                                    <?php
                                 endif;
                                 ?>
                                 <div class="job-user-meta">
                                     <?php if (!is_user_logged_in()) { ?>
-                                        <a href="<?php echo esc_url($j_register_url); ?>"><?php echo esc_html__('Create Account', 'wp-recruitment'); ?></a>
-                                        <a href="<?php echo esc_url($j_dashboard_url); ?>"><?php echo esc_html__('Candidate Login', 'wp-recruitment'); ?></a>
-                                        <a href="<?php echo esc_url($j_dashboard_url); ?>"><?php echo esc_html__('Employer Login', 'wp-recruitment'); ?></a>
+                                        <a
+                                            href="<?php echo esc_url($j_register_url); ?>"><?php echo esc_html__('Create Account', 'wp-recruitment'); ?></a>
+                                        <a
+                                            href="<?php echo esc_url($j_dashboard_url); ?>"><?php echo esc_html__('Candidate Login', 'wp-recruitment'); ?></a>
+                                        <a
+                                            href="<?php echo esc_url($j_dashboard_url); ?>"><?php echo esc_html__('Employer Login', 'wp-recruitment'); ?></a>
                                     <?php } ?>
                                 </div>
                             </div>
@@ -61,32 +67,32 @@ $j_dashboard_url = get_permalink($j_dashboard);
                                 </nav><!-- #site-navigation -->
                                 <?php if (is_user_logged_in()) { ?>
                                     <div class="cshero-navigation-right">
-                                        <?php if(is_active_sidebar('nav')): ?>
+                                        <?php if (is_active_sidebar('nav')): ?>
                                             <?php dynamic_sidebar('nav'); ?>
                                         <?php endif; ?>
                                     </div>
                                 <?php } else { ?>
                                     <div class="cshero-navigation-right cms-flex-col hidden-sm hidden-xs">
-                                        <form role="search" method="get" class="jb-job-search hidden-md"
-                                              action="<?php echo esc_url(home_url('/')); ?>">
+                                        <form method="get" class="jb-job-search hidden-md"
+                                            action="<?php echo esc_url(home_url('/')); ?>">
                                             <div>
                                                 <input type="search" id="jb-job-search-field" class="search-field"
-                                                       placeholder="<?php echo esc_attr_x('Search for Jobs', 'placeholder', 'wp-recruitment'); ?>"
-                                                       value="<?php echo get_search_query(); ?>" name="s"
-                                                       title="<?php echo esc_attr_x('Search for:', 'label', 'wp-recruitment'); ?>"/>
+                                                    placeholder="<?php echo esc_attr_x('Search for Jobs', 'placeholder', 'wp-recruitment'); ?>"
+                                                    value="<?php echo get_search_query(); ?>" name="s"
+                                                    title="<?php echo esc_attr_x('Search for:', 'label', 'wp-recruitment'); ?>" />
                                                 <input type="submit"
-                                                       value="<?php echo esc_attr_x('Search', 'submit button', 'wp-recruitment'); ?>"/>
-                                                <input type="hidden" name="post_type" value="jobboard-post-jobs"/>
+                                                    value="<?php echo esc_attr_x('Search', 'submit button', 'wp-recruitment'); ?>" />
+                                                <input type="hidden" name="post_type" value="jobboard-post-jobs" />
                                             </div>
                                         </form>
-                                        <?php if (!empty($opt_theme_options['view_job_text'])) : ?>
+                                        <?php if (!empty($view_job_text) && !empty($view_job_url)): ?>
                                             <div class="view-job">
                                                 <a class="btn"
-                                                   href="<?php echo esc_url($opt_theme_options['view_job_url']); ?>"><?php echo esc_attr($opt_theme_options['view_job_text']); ?></a>
+                                                    href="<?php echo esc_url($view_job_url); ?>"><?php echo esc_html($view_job_text); ?></a>
                                             </div>
                                         <?php endif; ?>
                                     </div>
-                                 <?php } ?>
+                                <?php } ?>
                             </div>
                         </div>
                     </div>

@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 ?>
 
-<form id="<?php echo esc_attr($args['form_id']); ?>" class="jobboard-form jb-form jb-login-form" action="<?php echo esc_url( site_url( 'wp-login.php', 'login_post' ) ); ?>" method="post">
+<form id="<?php echo esc_attr($args['form_id']); ?>" class="jobboard-form jb-form jb-login-form" action="<?php echo esc_url( home_url( 'wp-login.php', 'login_post' ) ); ?>" method="post">
 
     <?php if(!class_exists('JB_Demo')): ?>
         <h3 class="hidden-xs"><?php echo esc_html__('Existing Users Login Below', 'wp-recruitment'); ?></h3>

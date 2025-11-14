@@ -40,14 +40,9 @@ function recruitment_job_sidebar()
 
 function recruitment_job_sidebar_class()
 {
-    global $opt_theme_options;
-    $layout = '';
-    if (!empty($opt_theme_options['job_layout']) && $opt_theme_options['job_layout'] == 'list') {
-        $layout = 'jb-layout-list';
-    } else {
-        $layout = 'jb-layout-grid';
-    }
-    $layout = !empty($_GET['layout']) ? 'jb-layout-' . $_GET['layout'] : $layout;
+    $layout = recruitment_get_opt('job_layout', 'list');
+    $layout = isset($_GET['layout']) && in_array($_GET['layout'], ['list', 'grid']) ? $_GET['layout'] : $layout;
+    $layout .= "jb-layout-{$layout}";
     if ((is_jb_jobs() && (is_active_sidebar('job') || is_active_sidebar('job2'))) || (is_jb_account_listing() && (is_active_sidebar('jobboard-sidebar-employers') || is_active_sidebar('jobboard-sidebar-candidates') || is_active_sidebar('job')))) {
         echo '<div id="content" class="col-lg-9 col-md-8 col-sm-7 col-xs-12 sidebar-active ' . esc_attr($layout) . '">';
     } else {
@@ -57,9 +52,8 @@ function recruitment_job_sidebar_class()
 
 function recruitment_job_result_count()
 {
-    global $opt_theme_options;
-    $layout = $opt_theme_options['job_layout'];
-    $layout = !empty($_GET['layout']) ? $_GET['layout'] : $layout;
+    $layout = recruitment_get_opt('job_layout', 'list');
+    $layout = isset($_GET['layout']) && in_array($_GET['layout'], ['list', 'grid']) ? $_GET['layout'] : $layout;
     $page_jobs = jb_get_option('page-jobs');
     $link_back_all_jobs = get_permalink($page_jobs);
     $count_job = $GLOBALS['wp_query']->found_posts;
@@ -67,8 +61,9 @@ function recruitment_job_result_count()
     if ($layout === 'grid' && empty($_REQUEST['employer_id'])) {
         ?>
         <div class="jb-grid-head">
-            <a href="<?php echo esc_url($link_back_all_jobs) ?>"><?php echo esc_html__('Back to All Jobs', 'wp-recruitment') ?></a>
-            <h3><?php echo esc_attr($count_layout) ?></h3>
+            <a
+                href="<?php echo esc_url($link_back_all_jobs) ?>"><?php echo esc_html__('Back to All Jobs', 'wp-recruitment') ?></a>
+            <h3><?php echo esc_html($count_layout) ?></h3>
         </div>
         <?php
     }
@@ -77,7 +72,8 @@ function recruitment_job_result_count()
         $name_emp = !empty($employer->display_name) ? $employer->display_name : '';
         ?>
         <div class="jb-grid-head">
-            <a href="<?php echo esc_url($link_back_all_jobs) ?>"><?php echo esc_html__('Back to All Jobs', 'wp-recruitment') ?></a>
+            <a
+                href="<?php echo esc_url($link_back_all_jobs) ?>"><?php echo esc_html__('Back to All Jobs', 'wp-recruitment') ?></a>
             <h3><?php echo esc_html__('All Jobs by', 'wp-recruitment') . ' ' . esc_attr($name_emp) ?></h3>
         </div>
         <?php
@@ -86,19 +82,11 @@ function recruitment_job_result_count()
 
 function jb_template_catalog_layout()
 {
-    global $opt_theme_options;
+    $layout = recruitment_get_opt('job_layout', 'list');
+    $layout = isset($_GET['layout']) && in_array($_GET['layout'], ['list', 'grid']) ? $_GET['layout'] : $layout;
 
-    $layout = '';
-    if (!empty($opt_theme_options['job_layout']) && $opt_theme_options['job_layout'] == 'list') {
-        $layout = 'list';
-    } else {
-        $layout = 'grid';
-    }
-
-    $value = !empty($_GET['layout']) ? $_GET['layout'] : $layout;
-
-    echo '<span class="jb-layout-grid jb-layout"><input id="jb-layout-grid" type="radio" name="layout" value="grid" ' . checked($value, 'grid', false) . '/><i class="zmdi zmdi-view-module"></i><label for="jb-layout-grid">' . esc_html__('Grid', 'wp-recruitment') . '</label></span>';
-    echo '<span class="jb-layout-list jb-layout"><input id="jb-layout-list" type="radio" name="layout" value="list" ' . checked($value, 'list', false) . '/><i class="zmdi zmdi-view-list"></i><label for="jb-layout-list">' . esc_html__('List', 'wp-recruitment') . '</label></span>';
+    echo '<span class="jb-layout-grid jb-layout"><input id="jb-layout-grid" type="radio" name="layout" value="grid" ' . checked($layout, 'grid', false) . '/><i class="zmdi zmdi-view-module"></i><label for="jb-layout-grid">' . esc_html__('Grid', 'wp-recruitment') . '</label></span>';
+    echo '<span class="jb-layout-list jb-layout"><input id="jb-layout-list" type="radio" name="layout" value="list" ' . checked($layout, 'list', false) . '/><i class="zmdi zmdi-view-list"></i><label for="jb-layout-list">' . esc_html__('List', 'wp-recruitment') . '</label></span>';
 
 }
 
@@ -151,7 +139,8 @@ function recruitment_single_job_start()
  * Editer: TuanNA
  * Description: Hook Feature Image
  */
-function recruitment_job_feature_image(){
+function recruitment_job_feature_image()
+{
     echo '<!-- Start Feature Image -->';
 
     echo '<!-- End Feature Image -->';
@@ -173,10 +162,10 @@ function recruitment_single_job_end()
 
 function recruitment_single_job_page_title($bg)
 {
-    global $opt_theme_options;
+    $job_single_feature = recruitment_get_opt('job_single_feature', 'default');
     ?>
-    <div id="cms-page-title" class="page-title <?php echo esc_attr($opt_theme_options['job_single_feature']) ?>"
-         style="background-image: url(<?php echo esc_url($bg); ?>)">
+    <div id="cms-page-title" class="page-title <?php echo esc_attr($job_single_feature) ?>"
+        style="background-image: url(<?php echo esc_url($bg); ?>)">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
@@ -185,11 +174,16 @@ function recruitment_single_job_page_title($bg)
                         <h1><?php the_title(); ?></h1>
                     </div>
                     <ul>
-                        <li><?php printf('%1$s'.esc_html__('Position:', 'wp-recruitment').'%2$s %3$s', '<span>', '</span>', jb_job_get_type()); ?></li>
-                        <li><?php printf('%1$s'.esc_html__('Salary:', 'wp-recruitment').'%2$s %3$s', '<span>', '</span>', jb_job_get_salary()); ?></li>
-                        <li><?php printf('%1$s'.esc_html__('Location:', 'wp-recruitment').'%2$s %3$s', '<span>', '</span>', jb_job_location_html()); ?></li>
-                        <li><?php printf('<span>' . esc_html__('Job ID:', 'wp-recruitment') . '</span> %05d', get_the_ID()); ?></li>
-                        <li><?php printf('%1$s'.esc_html__('Applications:', 'wp-recruitment').'%2$s %3$s', '<span>', '</span>', jb_job_count_applied()); ?></li>
+                        <li><?php printf('%1$s' . esc_html__('Position:', 'wp-recruitment') . '%2$s %3$s', '<span>', '</span>', jb_job_get_type()); ?>
+                        </li>
+                        <li><?php printf('%1$s' . esc_html__('Salary:', 'wp-recruitment') . '%2$s %3$s', '<span>', '</span>', jb_job_get_salary()); ?>
+                        </li>
+                        <li><?php printf('%1$s' . esc_html__('Location:', 'wp-recruitment') . '%2$s %3$s', '<span>', '</span>', jb_job_location_html()); ?>
+                        </li>
+                        <li><?php printf('<span>' . esc_html__('Job ID:', 'wp-recruitment') . '</span> %05d', get_the_ID()); ?>
+                        </li>
+                        <li><?php printf('%1$s' . esc_html__('Applications:', 'wp-recruitment') . '%2$s %3$s', '<span>', '</span>', jb_job_count_applied()); ?>
+                        </li>
                     </ul>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-right text-left-sm text-left-xs">
@@ -218,8 +212,8 @@ function recruitment_single_job_sidebar()
 
     ?>
     <?php if (is_active_sidebar('job-single')) {
-    dynamic_sidebar('job-single');
-}
+        dynamic_sidebar('job-single');
+    }
     echo '</div>';
 }
 
@@ -260,37 +254,38 @@ function recruitment_user_class_args($args = array())
 
 function recruitment_user_grid_before()
 {
-    global $opt_theme_options;
-
-    if ((!isset($_GET['layout']) && !empty($opt_theme_options['job_layout'])) || (isset($_GET['layout']) && $_GET['layout'] == 'grid')) {
+    $job_layout = recruitment_get_opt('job_layout', 'list');
+    if ((!isset($_GET['layout']) && !empty($job_layout)) || (isset($_GET['layout']) && $_GET['layout'] == 'grid')) {
         echo '<div class="user-grid">';
     }
 }
 
 function recruitment_user_grid_after()
 {
-    global $opt_theme_options;
-
-    if ((!isset($_GET['layout']) && !empty($opt_theme_options['job_layout'])) || (isset($_GET['layout']) && $_GET['layout'] == 'grid')) {
+    $job_layout = recruitment_get_opt('job_layout', 'list');
+    if ((!isset($_GET['layout']) && !empty($job_layout)) || (isset($_GET['layout']) && $_GET['layout'] == 'grid')) {
         echo '</div>';
     }
 }
 
 function recruitment_job_join_us()
 {
-    global $opt_theme_options;
-    if (!empty($opt_theme_options['show_newsletter_form'])) : ?>
+    $show_newsletter_form = recruitment_get_opt('show_newsletter_form', false);
+    if ($show_newsletter_form == '1'):
+        $newsletter_title = recruitment_get_opt('newsletter_title', '');
+        $newsletter_desc = recruitment_get_opt('newsletter_desc', '');
+        ?>
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="job-newsletter box-modern row">
                 <div class="job-newsletter-heading col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                    <h3><?php echo esc_attr($opt_theme_options['newsletter_title']); ?></h3>
-                    <p><?php echo esc_attr($opt_theme_options['newsletter_desc']); ?></p>
+                    <h3><?php echo esc_html($newsletter_title); ?></h3>
+                    <p><?php echo esc_html($newsletter_desc); ?></p>
                 </div>
                 <div class="job-newsletter-form col-lg-6 col-md-6 col-sm-12 col-xs-12">
                     <?php
-                        if (class_exists('Newsletter')) {
-                            echo NewsletterSubscription::instance()->get_subscription_form();
-                        }
+                    if (class_exists('Newsletter')) {
+                        echo NewsletterSubscription::instance()->get_subscription_form();
+                    }
                     ?>
                 </div>
             </div>
@@ -300,15 +295,15 @@ function recruitment_job_join_us()
 
 function recruitment_template_job_tag()
 {
-    global $opt_theme_options; ?>
-    <?php if ($opt_theme_options['single_job_tag'] == 'show') : ?>
-    <div class="col-xs-12">
-        <div class="job-single-tag">
-            <?php $tag_ids = wp_get_object_terms(get_the_ID(), 'jobboard-tax-tags', array('orderby' => 'name', 'order' => 'ASC', 'fields' => 'names')); ?>
-            <?php
-            echo '<b>' . esc_html__('Tags:', 'wp-recruitment') . '</b>' . ' ' . implode(', ', $tag_ids);
-            ?>
+    if (recruitment_get_opt('single_job_tag', 'show') == 'show'):
+        ?>
+        <div class="col-xs-12">
+            <div class="job-single-tag">
+                <?php $tag_ids = wp_get_object_terms(get_the_ID(), 'jobboard-tax-tags', array('orderby' => 'name', 'order' => 'ASC', 'fields' => 'names')); ?>
+                <?php
+                echo '<b>' . esc_html__('Tags:', 'wp-recruitment') . '</b>' . ' ' . implode(', ', $tag_ids);
+                ?>
+            </div>
         </div>
-    </div>
-<?php endif; ?>
+    <?php endif; ?>
 <?php }
