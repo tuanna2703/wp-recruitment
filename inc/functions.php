@@ -6,10 +6,6 @@
  * Time: 3:48 PM
  */
 
-
-/* load list plugins */
-require_once get_template_directory() . '/inc/options/require.plugins.php';
-
 /* load demo data setting */
 require_once get_template_directory() . '/inc/demo-data.php';
 
