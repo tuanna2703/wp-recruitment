@@ -78,7 +78,7 @@ class CMSSuperHeroes_StaticCss
         // /* save option generate css */
         // add_action("redux/options/opt_theme_options/saved", array($this, 'generate_file'));
 
-        $this->dev_mode = isset($opt_theme_options) && isset($opt_theme_options['dev_mode']) && $opt_theme_options['dev_mode'] == '1';
+        $this->dev_mode = recruitment_get_opt('dev_mode', false) == '1';
         add_action('init', array($this, 'init'));
     }
 
@@ -163,9 +163,10 @@ class CMSSuperHeroes_StaticCss
         $css_file = $css_dir . 'static.css';
         // scss_formatter  or scss_formatter_compressed
         $this->scssc->setFormatter('ScssPhp\ScssPhp\Formatter\Crunched');
+        $result = $this->scssc->compileString('@import "master.scss";');
         $wp_filesystem->put_contents(
             $css_file,
-            preg_replace("/(?<=[^\r]|^)\n/", "\r\n", $this->scssc->compile('@import "master.scss"')),
+            preg_replace("/(?<=[^\r]|^)\n/", "\r\n", $result->getCss()),
             FS_CHMOD_FILE
         );
     }
