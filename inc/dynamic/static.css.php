@@ -62,23 +62,7 @@ class CMSSuperHeroes_StaticCss
             rc_framework()->scssphp();
         }
 
-        // if (!class_exists('\ScssPhp\ScssPhp\Compiler')) {
-        //     return;
-        // }
-
-        // /* scss */
-        // $this->scss = new scssc();
-
-        // /* set paths scss */
-        // $this->scss->setImportPaths(get_template_directory() . '/assets/scss/');
-
-        // /* generate css over time */
-        // add_action('wp', array($this, 'generate_over_time'));
-
-        // /* save option generate css */
-        // add_action("redux/options/opt_theme_options/saved", array($this, 'generate_file'));
-
-        $this->dev_mode = isset($opt_theme_options) && isset($opt_theme_options['dev_mode']) && $opt_theme_options['dev_mode'] == '1';
+        $this->dev_mode = recruitment_get_opt('dev_mode', false) == '1';
         add_action('init', array($this, 'init'));
     }
 
@@ -110,36 +94,6 @@ class CMSSuperHeroes_StaticCss
      */
     public function generate_file()
     {
-        // global $opt_theme_options, $wp_filesystem;
-
-        // if (empty($wp_filesystem) || !isset($opt_theme_options))
-        //     return;
-
-        // $options_scss = get_template_directory() . '/assets/scss/options.scss';
-
-        // /* delete files options.scss */
-        // $wp_filesystem->delete($options_scss);
-
-        // /* write options to scss file */
-        // $wp_filesystem->put_contents($options_scss, $this->css_render(), FS_CHMOD_FILE); // Save it
-
-        // /* minimize CSS styles */
-        // if (!$opt_theme_options['dev_mode'])
-        //     $this->scss->setFormatter('scss_formatter_compressed');
-
-        // /* compile scss to css */
-        // $css = $this->scss_render();
-
-        // $file = "static.css";
-
-        // $file = get_template_directory() . '/assets/css/' . $file;
-
-        // /* delete files static.css */
-        // $wp_filesystem->delete($file);
-
-        // /* write static.css file */
-        // $wp_filesystem->put_contents($file, $css, FS_CHMOD_FILE); // Save it
-
         require_once ABSPATH . 'wp-admin/includes/file.php';
         global $wp_filesystem;
         if (!is_a($wp_filesystem, 'WP_Filesystem_Base')) {
