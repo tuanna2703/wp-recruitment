@@ -117,9 +117,10 @@ class CMSSuperHeroes_StaticCss
         $css_file = $css_dir . 'static.css';
         // scss_formatter  or scss_formatter_compressed
         $this->scssc->setFormatter('ScssPhp\ScssPhp\Formatter\Crunched');
+        $result = $this->scssc->compileString('@import "master.scss";');
         $wp_filesystem->put_contents(
             $css_file,
-            preg_replace("/(?<=[^\r]|^)\n/", "\r\n", $this->scssc->compile('@import "master.scss"')),
+            preg_replace("/(?<=[^\r]|^)\n/", "\r\n", $result->getCss()),
             FS_CHMOD_FILE
         );
     }
