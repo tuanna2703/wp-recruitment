@@ -42,7 +42,7 @@ function recruitment_job_sidebar_class()
 {
     $layout = recruitment_get_opt('job_layout', 'list');
     $layout = isset($_GET['layout']) && in_array($_GET['layout'], ['list', 'grid']) ? $_GET['layout'] : $layout;
-    $layout .= "jb-layout-{$layout}";
+    $layout = "jb-layout-{$layout}";
     if ((is_jb_jobs() && (is_active_sidebar('job') || is_active_sidebar('job2'))) || (is_jb_account_listing() && (is_active_sidebar('jobboard-sidebar-employers') || is_active_sidebar('jobboard-sidebar-candidates') || is_active_sidebar('job')))) {
         echo '<div id="content" class="col-lg-9 col-md-8 col-sm-7 col-xs-12 sidebar-active ' . esc_attr($layout) . '">';
     } else {
