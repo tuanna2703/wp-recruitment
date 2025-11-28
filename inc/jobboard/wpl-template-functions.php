@@ -1,5 +1,4 @@
 <?php
-
 function recruitment_job_sidebar()
 {
     if ((is_jb_jobs() && (is_active_sidebar('job') || is_active_sidebar('job2'))) || (is_jb_account_listing() && (is_active_sidebar('jobboard-sidebar-employers') || is_active_sidebar('jobboard-sidebar-candidates') || is_active_sidebar('job')))) {
