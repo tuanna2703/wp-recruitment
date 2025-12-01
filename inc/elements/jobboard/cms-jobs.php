@@ -6,34 +6,34 @@ vc_map(array(
     "category" => esc_html__('JobBoard', "wp-recruitment"),
     "params" => array(
         array(
-            "type"          => "textfield",
-            "heading"       => esc_html__('Title', "wp-recruitment"),
-            "param_name"    => "title",
-            "admin_label"   => true,
+            "type" => "textfield",
+            "heading" => esc_html__('Title', "wp-recruitment"),
+            "param_name" => "title",
+            "admin_label" => true,
         ),
         array(
-            "type"          => "dropdown",
-            "heading"       => esc_html__("Query Type", "wp-recruitment"),
-            "param_name"    => "type",
-            "admin_label"   => true,
-            "value"         => array(
+            "type" => "dropdown",
+            "heading" => esc_html__("Query Type", "wp-recruitment"),
+            "param_name" => "type",
+            "admin_label" => true,
+            "value" => array(
                 esc_html__("Recent", 'wp-recruitment') => "recent",
                 esc_html__("Featured", 'wp-recruitment') => "featured",
                 esc_html__("Interest", 'wp-recruitment') => "interest"
             )
         ),
         array(
-            "type"          => "textfield",
-            "heading"       => esc_html__('Query Limit', "wp-recruitment"),
-            "param_name"    => "limit",
-            "std"           => 12,
-            "description"   => esc_html__('Limit jobs in query.', "wp-recruitment")
+            "type" => "textfield",
+            "heading" => esc_html__('Query Limit', "wp-recruitment"),
+            "param_name" => "limit",
+            "std" => 12,
+            "description" => esc_html__('Limit jobs in query.', "wp-recruitment")
         ),
         array(
-            "type"          => "textfield",
-            "heading"       => esc_html__('Post in row', "wp-recruitment"),
-            "param_name"    => "post_per_row",
-            "std"           => 4,
+            "type" => "textfield",
+            "heading" => esc_html__('Post in row', "wp-recruitment"),
+            "param_name" => "post_per_row",
+            "std" => 4,
         ),
         array(
             "type" => "cms_template",
@@ -52,8 +52,8 @@ vc_map(array(
                 "Style 3" => "style3",
             ),
             "dependency" => array(
-                "element"=>"cms_template",
-                "value"=>array(
+                "element" => "cms_template",
+                "value" => array(
                     "cms_jobs--featured.php",
                     "cms_jobs--recent.php",
                     "cms_jobs--recent2.php",
@@ -69,8 +69,8 @@ vc_map(array(
                 "Hidden" => "hidden",
             ),
             "dependency" => array(
-                "element"=>"cms_template",
-                "value"=>array(
+                "element" => "cms_template",
+                "value" => array(
                     "cms_jobs--recent.php",
                 )
             ),
@@ -138,10 +138,10 @@ vc_map(array(
             'group' => 'Carousel Settings',
         ),
         array(
-            'type'       => 'textfield',
-            'heading'    => esc_html__('Margin Items', 'wp-recruitment'),
+            'type' => 'textfield',
+            'heading' => esc_html__('Margin Items', 'wp-recruitment'),
             'param_name' => 'margin',
-            'value'      => '',
+            'value' => '',
             'group' => 'Carousel Settings',
             'description' => 'Enter number: ...( Default 30 )',
         ),
@@ -176,10 +176,10 @@ vc_map(array(
             "group" => 'Carousel Settings',
         ),
         array(
-            "type"          => "textfield",
-            "heading"       => esc_html__('Custom Class', "wp-recruitment"),
-            "param_name"    => "custom_class",
-            "admin_label"   => true,
+            "type" => "textfield",
+            "heading" => esc_html__('Custom Class', "wp-recruitment"),
+            "param_name" => "custom_class",
+            "admin_label" => true,
         ),
     )
 ));
@@ -191,42 +191,42 @@ class WPBakeryShortCode_cms_jobs extends CmsShortCode
     {
 
         $new_atts = shortcode_atts(array(
-            'title'         => '',
-            'job_style'     => 'style1',
-            'custom_class'  => '',
-            'type'          => 'recent',
-            'limit'         => 12,
-            'items'         => 1,
-            'cms_template'  => 'cms_jobs--recent.php',
-        ),$atts);
-        $atts = array_merge($new_atts,$atts);
+            'title' => '',
+            'job_style' => 'style1',
+            'custom_class' => '',
+            'type' => 'recent',
+            'limit' => 12,
+            'items' => 1,
+            'cms_template' => 'cms_jobs--recent.php',
+        ), $atts);
+        $atts = array_merge($new_atts, $atts);
 
-        wp_enqueue_style('owl-carousel',get_template_directory_uri() . '/assets/css/owl.carousel.css','','2.0.0b','all');
-        wp_enqueue_script('owl-carousel',get_template_directory_uri() . '/assets/js/owl.carousel.min.js',array('jquery'),'2.0.0b',true);
+        wp_enqueue_style('owl-carousel', get_template_directory_uri() . '/assets/css/owl.carousel.css', [], '2.0.0b', 'all');
+        wp_enqueue_script('owl-carousel', get_template_directory_uri() . '/assets/js/owl.carousel.min.js', array('jquery'), '2.0.0b', true);
         wp_enqueue_script('cms-jobs', get_template_directory_uri() . '/inc/elements/jobboard/cms-jobs.js', array('owl-carousel'), '1.0.0', true);
 
         $query = array(
-            'post_type'     => 'jobboard-post-jobs',
-            'post_status'   => 'publish',
-            'posts_per_page'=> $atts['limit']
+            'post_type' => 'jobboard-post-jobs',
+            'post_status' => 'publish',
+            'posts_per_page' => $atts['limit']
         );
 
-        if($atts['type'] == 'featured'){
+        if ($atts['type'] == 'featured') {
             $query['meta_query'] = array(
                 array(
-                    'key'     => '_featured',
-                    'value'   => '1'
+                    'key' => '_featured',
+                    'value' => '1'
                 )
             );
-        } elseif ($atts['type'] == 'interest' && function_exists('jb_similar')){
+        } elseif ($atts['type'] == 'interest' && function_exists('jb_similar')) {
             $query = jb_similar()->similar($query);
         }
 
         $content = new WP_Query($query);
 
-        $atts['template'] = 'template-'.str_replace('.php','',$atts['cms_template']). ' '. $atts['custom_class'];
+        $atts['template'] = 'template-' . str_replace('.php', '', $atts['cms_template']) . ' ' . $atts['custom_class'];
 
-        if(!is_wp_error($content) && !empty($content)) {
+        if (!is_wp_error($content) && !empty($content)) {
             return parent::content($atts, $content);
         }
     }
