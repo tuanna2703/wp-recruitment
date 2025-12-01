@@ -295,7 +295,7 @@ add_action('wp_enqueue_scripts', 'recruitment_front_end_scripts');
  */
 function recruitment_admin_scripts()
 {
-	$theme = wp_get_theme( get_template() );
+	$theme = wp_get_theme(get_template());
 	/* Loads Bootstrap stylesheet. */
 	wp_enqueue_style('font-awesome', get_template_directory_uri() . '/assets/css/font-awesome.min.css', array(), '4.3.0');
 
