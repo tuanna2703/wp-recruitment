@@ -2461,7 +2461,7 @@ body .owl-carousel .owl-item img {
 				&:before {
 					height: 110px;
 					width: 110px;
-					border: 10px solid lighten($primary_color, 0.1);
+					border: 10px solid adjust-color($primary_color, $red: 33, $green: 0, $blue: 51);
 					content: "";
 					position: absolute;
 					top: -10px;
@@ -2484,7 +2484,7 @@ body .owl-carousel .owl-item img {
 				.cms-process-icon:after {
 					height: 10px;
 					width: 200px;
-					background-color: lighten($primary_color, 0.1);
+					background-color: adjust-color($primary_color, $red: 33, $green: 0, $blue: 51);
 					content: "";
 					position: absolute;
 					top: 50%;

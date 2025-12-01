@@ -5,15 +5,6 @@ function recruitment_set_demo_opt_name(){
     return 'opt_theme_options';
 }
 
-add_filter('ef3-replace-content', 'recruitment_replace_content', 10 , 2);
-
-function recruitment_replace_content($replaces, $attachment){
-    return array(
-        '/tax_query:/' => 'remove_query:',
-        '/categories:/' => 'remove_query:',
-    );
-}
-
 add_filter('ef3-replace-theme-options', 'recruitment_replace_theme_options');
 
 function recruitment_replace_theme_options(){
