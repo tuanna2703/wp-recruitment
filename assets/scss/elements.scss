@@ -2991,15 +2991,58 @@ body .owl-carousel .owl-item img {
 			cursor: pointer;
 		}
 
+		&.input-4 {
+			.jb-s-item {
+				&:nth-child(1) {
+					width: 100%;
+				}
+
+				&:nth-child(2),
+				&:nth-child(3),
+				&:nth-child(4),
+				&:nth-child(5) {
+					width: 25%;
+				}
+			}
+		}
+
+		&.input-3 {
+			.jb-s-item {
+
+				&:nth-child(1),
+				&:nth-child(2) {
+					width: 30%;
+				}
+			}
+		}
+
+		&.input-2 {
+			.jb-s-item {
+
+				&:nth-child(1),
+				&:nth-child(2) {
+					width: 40%;
+				}
+			}
+		}
+
+		&.input-1 {
+			.jb-s-item {
+				&:nth-child(1) {
+					width: 80%;
+				}
+			}
+		}
+
 		.jb-s-item {
 			width: 20%;
 			float: left;
 			padding: 0 8px;
 
-			&.search-key,
-			&.search-locations {
-				width: 30%;
-			}
+			// &.search-key,
+			// &.search-locations {
+			// 	width: 30%;
+			// }
 
 			.jb-s-item-inner {
 				position: relative;
@@ -3032,14 +3075,14 @@ body .owl-carousel .owl-item img {
 		}
 
 		&.search-type-active .jb-s-item {
-			width: 25%;
+			// width: 25%;
 
-			&.search-locations {
-				width: 25%;
-			}
+			// &.search-locations {
+			// 	width: 25%;
+			// }
 
 			&.search-key {
-				width: 100%;
+				// width: 100%;
 				margin-bottom: 16px;
 			}
 		}
