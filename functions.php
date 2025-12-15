@@ -272,18 +272,11 @@ function recruitment_front_end_scripts()
 	/* Loads our main stylesheet. */
 	wp_enqueue_style('wp-recruitment-style', get_stylesheet_uri(), array('bootstrap'));
 
-	/* Loads the Internet Explorer specific stylesheet. */
-	wp_enqueue_style('wp-recruitment-ie', get_template_directory_uri() . '/assets/css/ie.css', array('wp-recruitment-style'), '20121010');
-
-	/* ie */
-	$wp_styles->add_data('wp-recruitment-ie', 'conditional', 'lt IE 9');
-
 	/* Loads Pe Icon. */
 	wp_enqueue_style('cmssuperheroes-pe-icon', get_template_directory_uri() . '/assets/css/pe-icon-7-stroke.css', array(), '1.0.1');
 
 	/* Load static css*/
 	wp_enqueue_style('wp-recruitment-static', get_template_directory_uri() . '/assets/css/static.css', array('wp-recruitment-style'), $theme->get('Version'));
-
 }
 
 add_action('wp_enqueue_scripts', 'recruitment_front_end_scripts');
